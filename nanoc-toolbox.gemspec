@@ -7,13 +7,12 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Anouar ADLANI"]
   s.email       = ["anouar@adlani.com"]
-  s.homepage    = "http://rubygems.org/gems/nanoc-tools"
+  s.homepage    = "http://aadlani.github.com/nanoc-toolbox/"
   s.summary     = "A collection of helper and filters for nanoc"
   s.description = ""
   
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "nanoc-toolbox"
 
   s.add_dependency "nanoc", ">= 3.1.6"
   
