@@ -1,5 +1,5 @@
-require 'toolbox/helpers/version'
-require 'toolbox/helpers/helpers'
+require 'nanoc/toolbox/version'
+require 'nanoc/toolbox/helpers'
 module Nanoc
   module Toolbox
     # Your code goes here...

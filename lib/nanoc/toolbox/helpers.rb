@@ -1,5 +1,5 @@
-require 'helpers/navigation'
+require 'nanoc/toolbox/helpers/navigation'
 
-module Nanoc3::Toolbox::Helpers
+module Nanoc::Toolbox::Helpers
 
 end

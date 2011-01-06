@@ -1,4 +1,4 @@
-module Nanoc3::Toolbox::Helpers
+module Nanoc::Toolbox::Helpers
 
   # NANOC Helper for the Navigation related stuff.
   # This module contains functionality for generating navigation menus for your

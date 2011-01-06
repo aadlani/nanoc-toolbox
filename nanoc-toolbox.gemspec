@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    = "http://rubygems.org/gems/nanoc-tools"
   s.summary     = "A collection of helper and filters for nanoc"
   s.description = ""
-  s.require_paths = ["lib"]
   
 
   s.required_rubygems_version = ">= 1.3.6"

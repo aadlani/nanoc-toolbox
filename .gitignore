@@ -1,3 +1,10 @@
 pkg/*
 *.gem
 .bundle
+.DS_Store
+.autotest
+.idea
+.yardoc
+rdoc
+doc
+coverage

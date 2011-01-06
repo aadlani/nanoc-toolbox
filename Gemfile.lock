@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    nanoc-toolbox (0.0.1)
+      nanoc (>= 3.1.6)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    cri (1.0.1)
+    nanoc (3.1.6)
+      nanoc3 (>= 3.1.6)
+    nanoc3 (3.1.6)
+      cri (>= 1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (>= 1.0.0)
+  nanoc (>= 3.1.6)
+  nanoc-toolbox!
