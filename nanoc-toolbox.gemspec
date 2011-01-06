@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["anouar@adlani.com"]
   s.homepage    = "http://aadlani.github.com/nanoc-toolbox/"
   s.summary     = "A collection of helper and filters for nanoc"
-  s.description = ""
+  s.description = "The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc"
   
 
   s.required_rubygems_version = ">= 1.3.6"
