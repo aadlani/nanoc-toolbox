@@ -2,7 +2,7 @@
 
 ## developement
 
-*
+* NEW: 		Gravatar Helper
 
 ## Release 0.0.2
 
