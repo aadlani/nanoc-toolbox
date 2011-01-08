@@ -43,15 +43,57 @@
     
     <div id="content"><div id='filecontents'><h1>nanoc-toolbox</h1>
 
+<h2>Presentation</h2>
+
+<p>The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc</p>
+
 <h2>Features</h2>
+
+<ul>
+<li>Navigation Helper</li>
+</ul>
+
 
 <h2>Requirements</h2>
 
+<ul>
+<li>nanoc3</li>
+</ul>
+
+
 <h2>Instalation</h2>
+
+<p>To use the nanoc-toolbox, you have to start by installing the gem.</p>
+
+<pre class="code"><span class='id gem'>gem</span> <span class='id install'>install</span> <span class='id nanox'>nanox</span><span class='op'>-</span><span class='id toolbox'>toolbox</span>
+</pre>
+
+<p>Then require the project main file in your default.rb file in the lib directory of your nanoc project.</p>
+
+<pre class="code"><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>nanoc/toolbox</span><span class='tstring_end'>&quot;</span></span>
+</pre>
+
+<p>And the last step is to include the required helper or filter, anywhere in the lib directory of your lib directory.
+The usage wants you to put it in the default.rb or the helpers.rb file. </p>
+
+<p>The following example shows a sample helpers_.rb file in the lib directory</p>
+
+<pre class="code"><span class='comment'># Default Helpers provided By Nanoc
+</span><span class='id include'>include</span> <span class='const'>Nanoc3</span><span class='op'>::</span><span class='const'>Helpers</span><span class='op'>::</span><span class='const'>Blogging</span>
+<span class='id include'>include</span> <span class='const'>Nanoc3</span><span class='op'>::</span><span class='const'>Helpers</span><span class='op'>::</span><span class='const'>Breadcrumbs</span>
+
+<span class='comment'># Custom Helpers
+</span><span class='id include'>include</span> <span class='const'>Nanoc</span><span class='op'>::</span><span class='const'>Toolbox</span><span class='op'>::</span><span class='const'>Helpers</span><span class='op'>::</span><span class='const'>Navigation</span>
+</pre>
 
 <h2>Acknowledgments</h2>
 
 <h2>Author</h2>
+
+<ul>
+<li>Anouar ADLANI <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#97;&#x6e;&#x6f;&#x75;&#x61;&#114;&#x40;&#x61;&#x64;&#x6c;&#x61;&#x6e;&#105;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#110;&#111;&#117;&#97;&#114;&#x40;&#97;&#100;&#x6c;&#x61;&#110;&#105;&#46;&#x63;&#x6f;&#x6d;</a></li>
+</ul>
+
 
 <h2>Changelog</h2>
 
@@ -64,7 +106,7 @@ See the LICENSE.md file for details.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Thu Jan  6 16:04:02 2011 by 
+  Generated on Sat Jan  8 02:02:50 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>

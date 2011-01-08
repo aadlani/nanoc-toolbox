@@ -1,0 +1,851 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Nanoc::Toolbox::Helpers::Gravatar</title>
+<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../../_index.html">Index (G)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../../Nanoc.html" title="Nanoc (module)">Nanoc</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Toolbox.html" title="Nanoc::Toolbox (module)">Toolbox</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Helpers.html" title="Nanoc::Toolbox::Helpers (module)">Helpers</a></span></span>
+     &raquo; 
+    <span class="title">Gravatar</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Nanoc::Toolbox::Helpers::Gravatar
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/nanoc/toolbox/helpers/gravatar.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+NANOC Helper for the Gravatar avatars
+</p>
+<p>
+This module contains functions for generating URL or IMG tags to  display
+the Gravatar linked to an address email, or the default gravatar
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><a href="http://en.gravatar.com/" target="_parent" title="http://en.gravatar.com/">http://en.gravatar.com/</a></li>
+    
+  </ul>
+<h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Anouar ADLANI <anouar@adlani.com>
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="URL-constant" class="">URL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Gravatar avatar image base URL
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span> <span class='symbol'>:http</span>   <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://gravatar.com/avatar/</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='symbol'>:https</span>  <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://secure.gratatar.com/avatar/</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></pre></dd>
+      
+        <dt id="RATING-constant" class="">RATING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Collection of allowed ratings
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qwords_beg'>%w{</span><span class='tstring_end'>g</span></span></pre></dd>
+      
+        <dt id="ICONS-constant" class="">ICONS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Default Icon sets
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qwords_beg'>%w{</span><span class='tstring_end'>none</span></span></pre></dd>
+      
+        <dt id="SIZE-constant" class="">SIZE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Size range available
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span><span class='op'>..</span><span class='int'>512</span></pre></dd>
+      
+        <dt id="AVAILABLE_OPTIONS-constant" class="">AVAILABLE_OPTIONS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Available options that could be configure
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='symbol'>:default_icon</span><span class='comma'>,</span> <span class='symbol'>:size</span><span class='comma'>,</span> <span class='symbol'>:rating</span><span class='comma'>,</span> <span class='symbol'>:ext</span><span class='comma'>,</span> <span class='symbol'>:secure</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="DEFAULT_VALUES-constant" class="">DEFAULT_VALUES =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Default values set to the options
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span> <span class='symbol'>:size</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:rating</span> <span class='op'>=&gt;</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:ext</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='symbol'>:secure</span> <span class='op'>=&gt;</span> <span class='kw'>false</span> <span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#build_options_parameters-instance_method" title="#build_options_parameters (instance method)">- (Object) <strong>build_options_parameters</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Build the options parameters for the URL.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gravatar_image-instance_method" title="#gravatar_image (instance method)">- (Object) <strong>gravatar_image</strong>(email, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Generate the image tag to the gravatar of the supplied email.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gravatar_url-instance_method" title="#gravatar_url (instance method)">- (Object) <strong>gravatar_url</strong>(email, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Generate image URL.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="build_options_parameters-instance_method">
+  
+    - (<tt>Object</tt>) <strong>build_options_parameters</strong>(options = {})  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Build the options parameters for the URL.  It simply consists in returning
+the URL query string based on the options passed
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='lbrace'>{</span><span class='symbol'>:size</span> <span class='op'>=&gt;</span> <span class='int'>225</span><span class='comma'>,</span> <span class='symbol'>:rating</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>g</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:ext</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='symbol'>:secure</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='rbrace'>}</span>
+<span class='comment'>#=&gt; &quot;?size=225&amp;rating=g&amp;ext=false&amp;secure=false&quot;</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options to pass to the gravatar URL
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">default_icon</span>
+          <span class="default">
+            
+          </span>
+          
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">size</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Size of the image, between 1 to 512
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">rating</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The rating allowed, a value in g, pg, r or x
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">ext</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Use or not a file extension
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">secure</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Use or not https
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/gravatar.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id build_options_parameters'>build_options_parameters</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='comment'># Remove unecessary options
+</span>  <span class='comment'># TODO: Remove the options not related to gravatar (ext, secure, ...)
+</span>  
+  <span class='comment'># Return now if the options hash is empty after cleanup
+</span>  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id options'>options</span><span class='period'>.</span><span class='id empty?'>empty?</span>
+
+  <span class='comment'># Build the parameters string
+</span>  <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>?</span><span class='tstring_end'>'</span></span> <span class='op'>+</span> <span class='id options'>options</span><span class='period'>.</span><span class='id to_a'>to_a</span><span class='period'>.</span><span class='id map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id e'>e</span><span class='op'>|</span>  <span class='id e'>e</span> <span class='op'>=</span> <span class='id e'>e</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>=</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id e'>e</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>==</span> <span class='int'>2</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&amp;</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="gravatar_image-instance_method">
+  
+    - (<tt>Object</tt>) <strong>gravatar_image</strong>(email, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Generate the image tag to the gravatar of the supplied email
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='id gravatar_image'>gravatar_image</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>anouar@adlani.com</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:size</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>100</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='comment'>#=&gt; &lt;img src=&quot;http://gravatar.com/avatar/4d076af1db60b16e1ce080505baf821c?size=100&quot; /&gt;</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>email</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><p>
+the email address of the gravatar account
+</p>
+</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options to pass to the gravatar URL
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">default_icon</span>
+          <span class="default">
+            
+          </span>
+          
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">size</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Size of the image, between 1 to 512
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">rating</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The rating allowed, a value in g, pg, r or x
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">ext</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Use or not a file extension
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">secure</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Use or not https
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/gravatar.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id gravatar_image'>gravatar_image</span><span class='lparen'>(</span><span class='id email'>email</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id image_url'>image_url</span> <span class='op'>=</span> <span class='id gravatar_url'>gravatar_url</span><span class='lparen'>(</span><span class='id email'>email</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;img src='</span><span class='embexpr_beg'>#{</span><span class='id image_url'>image_url</span><span class='rbrace'>}</span><span class='tstring_content'>' /&gt;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="gravatar_url-instance_method">
+  
+    - (<tt>Object</tt>) <strong>gravatar_url</strong>(email, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Generate image URL
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='id gravatar_url'>gravatar_url</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>anouar@adlani.com</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:size</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>512</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:ext</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='comment'>#=&gt; &quot;http://gravatar.com/avatar/4d076af1db60b16e1ce080505baf821c.jpg?size=512&quot;</span></pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <span class='name'>email</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><p>
+the email address of the gravatar account
+</p>
+</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the options to pass to the gravatar URL
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">default_icon</span>
+          <span class="default">
+            
+          </span>
+          
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">size</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Size of the image, between 1 to 512
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">rating</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The rating allowed, a value in g, pg, r or x
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">ext</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Use or not a file extension
+</p>
+</div>
+        </tr>
+      
+        <li>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="name">secure</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Use or not https
+</p>
+</div>
+        </tr>
+      
+    </ul>
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/gravatar.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id gravatar_url'>gravatar_url</span><span class='lparen'>(</span><span class='id email'>email</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='comment'># Prepare the options
+</span>  <span class='id options'>options</span> <span class='op'>=</span> <span class='const'>DEFAULT_VALUES</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='id options'>options</span> <span class='op'>=</span> <span class='id clean_options'>clean_options</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
+
+  <span class='comment'># Retreive the URL depending on the protocole and build it
+</span>  <span class='id protocole'>protocole</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:secure</span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='symbol'>:https</span> <span class='op'>:</span> <span class='symbol'>:http</span>
+  <span class='id host'>host</span> <span class='op'>=</span> <span class='const'>URL</span><span class='lbracket'>[</span><span class='id protocole'>protocole</span><span class='rbracket'>]</span>
+
+  <span class='comment'># generate the image name and append a the extension if requested
+</span>  <span class='id file'>file</span> <span class='op'>=</span> <span class='id hash_email'>hash_email</span><span class='lparen'>(</span><span class='id email'>email</span><span class='rparen'>)</span>
+  <span class='id file'>file</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.jpg</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:ext</span><span class='rbracket'>]</span>
+
+  <span class='comment'># Build the query string
+</span>  <span class='id parameters'>parameters</span> <span class='op'>=</span> <span class='id build_options_parameters'>build_options_parameters</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
+
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id host'>host</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id file'>file</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id parameters'>parameters</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sat Jan  8 02:02:50 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
