@@ -3,6 +3,7 @@
 ## developement
 
 * NEW: 		Gravatar Helper
+* CHANGED:	Better Yardoc documentation
 
 ## Release 0.0.2
 
