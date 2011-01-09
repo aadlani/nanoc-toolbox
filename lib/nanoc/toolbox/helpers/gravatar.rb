@@ -78,12 +78,13 @@ module Nanoc::Toolbox::Helpers
     end
 
     protected
-      # Build the options parameters for the URL.
+      # Filters, Validates and build the options parameters for the URL.
       # It simply consists in returning the URL query string based on the options passed
+      # after validating the availability the correctness of the option
       #
       # @example
       #   {:size => 225, :rating => 'g', :ext => false, :secure => false}
-      #   #=> "?size=225&rating=g&ext=false&secure=false"
+      #   #=> "?size=225&rating=g"
       #
       # @param [Hash] options the options to pass to the gravatar URL
       # @option options [String] default_icon
@@ -109,6 +110,9 @@ module Nanoc::Toolbox::Helpers
         Digest::MD5.hexdigest(email)
       end
 
+      # @example
+      #   {:size => 225, :rating => 'g', :ext => false, :secure => false}
+      #   #=> "?size=225&rating=g"
       def clean_options(options={})
         # remove unsupported options
         options.delete_if {|key, value| !AVAILABLE_OPTIONS.include?(key) }
