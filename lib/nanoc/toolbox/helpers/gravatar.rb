@@ -2,7 +2,7 @@ module Nanoc::Toolbox::Helpers
 
   # NANOC Helper for the Gravatar avatars
   #
-  # This module contains functions for generating URL or IMG tags to 
+  # This module contains functions for generating URL or IMG tags to
   # display the Gravatar linked to an address email, or the default gravatar
   #
   # @see http://en.gravatar.com/
@@ -24,7 +24,9 @@ module Nanoc::Toolbox::Helpers
     SIZE = 1..512
 
     # Available options that could be configure
-    AVAILABLE_OPTIONS = [:default_icon, :size, :rating, :ext, :secure]
+    HELPER_OPTION = [:ext, :secure]
+    GRAVATAR_OPTIONS = [:default_icon, :size, :rating]
+    AVAILABLE_OPTIONS = HELPER_OPTION + GRAVATAR_OPTIONS
 
     # Default values set to the options
     DEFAULT_VALUES = { :size => nil, :rating => nil, :ext => false, :secure => false }
@@ -54,6 +56,9 @@ module Nanoc::Toolbox::Helpers
     # @param  options (see #build_options_parameters)
     # @option options (see #build_options_parameters)
     def gravatar_url(email, options={})
+      # Prepare the email
+      email = clean_email(email)
+
       # Prepare the options
       options = DEFAULT_VALUES.merge(options)
       options = clean_options(options)
@@ -73,7 +78,7 @@ module Nanoc::Toolbox::Helpers
     end
 
     protected
-      # Build the options parameters for the URL. 
+      # Build the options parameters for the URL.
       # It simply consists in returning the URL query string based on the options passed
       #
       # @example
@@ -88,13 +93,13 @@ module Nanoc::Toolbox::Helpers
       # @option options [Boolean] secure (false) Use or not https
       def build_options_parameters(options={})
         # Remove unecessary options
-        # TODO: Remove the options not related to gravatar (ext, secure, ...)
-        
+        options.delete_if {|key, value| !GRAVATAR_OPTIONS.include?(key) }
+
         # Return now if the options hash is empty after cleanup
         return '' if options.empty?
 
         # Build the parameters string
-        '?' + options.to_a.map { |e|  e = e.join('=') if e.size == 2}.join('&')
+        '?' + options.sort.map { |e|  e = e.join('=') if e.size == 2}.join('&')
       end
 
     private
@@ -105,7 +110,25 @@ module Nanoc::Toolbox::Helpers
       end
 
       def clean_options(options={})
-        options.delete_if {|key, value| value.nil? || value.to_s.empty? }
+        # remove unsupported options
+        options.delete_if {|key, value| !AVAILABLE_OPTIONS.include?(key) }
+
+        # remove empty options
+        options.delete_if {|key, value| value.nil? || value.to_s.strip == '' }
+
+        # remove options with unsupported values
+        options.delete(:default_icon) unless ICONS.include?(options[:default_icon])
+        options.delete(:rating) unless RATING.include?(options[:rating])
+        options.delete(:size) unless SIZE.include?(options[:size].to_i)
+
+        # cleanned up options
+        options
+      end
+
+      # Clean up and validates email
+      def clean_email(email='')
+        raise ArgumentError.new('Invalid email') if email.empty? || email.index('@').nil? || email.size <= 6
+        email.strip
       end
 
   end
