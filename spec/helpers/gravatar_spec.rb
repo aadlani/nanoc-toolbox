@@ -10,30 +10,29 @@ describe Nanoc::Toolbox::Helpers::Gravatar do
       true => 'https://secure.gratatar.com/' + @avatar,
       false => 'http://gravatar.com/' + @avatar
     }
+    
   end
 
   describe "#gravatar_url" do
-    
     context "when no parameters passed in the options" do
-      
       it "converts an email address to the a gravatar URL" do
         gravatar_url(@email).should == @secure_host[false]
       end
 
-      it "converts an email address to the a secure gravatar URL" do
+      it "converts an email address to the a secure gravatar URL when requested" do
         gravatar_url(@email, :secure => true).should == @secure_host[true]
       end
       
       it "raise an Argument error when the email is invalid" do
         lambda{gravatar_url('')}.should raise_error(ArgumentError)
-        lambda{gravatar_url('a@a')}.should raise_error(ArgumentError)
-        lambda{gravatar_url('')}.should raise_error(ArgumentError)
+        lambda{gravatar_url('a@a.c')}.should raise_error(ArgumentError)
+        lambda{gravatar_url('@example.com')}.should raise_error(ArgumentError)
+        lambda{gravatar_url('name@name@example.com')}.should raise_error(ArgumentError)
       end
       
       it "strips the additionnal spaces before and after the email" do
         gravatar_url(" \n  #{@email}   \n").should == @secure_host[false]
       end
-      
     end
 
 
@@ -58,7 +57,21 @@ describe Nanoc::Toolbox::Helpers::Gravatar do
       it "ignores the bad type or the out of rnage parameters" do
         gravatar_url(@email, :size => '45', :rating => 'xssss').should == @secure_host[false] + '?size=45'
       end
-      
     end
+  end
+  
+  describe "#gravatar_image" do
+    
+    it "converts an email to an html tag" do
+      gravatar_image(@email).should == %[<img src='#{@secure_host[false]}' />]
+    end
+    
+    it "converts an email to an html tag with options for the gravatar" do
+      gravatar_image(@email,  :size => 45, :default_icon => 'monsterid', :rating => 'xss').should == %[<img src='#{@secure_host[false]}?default_icon=monsterid&size=45' />]
+    end
+    
+    it "converts an email to an html tag with options for the img tag"
+    
+    it "converts an email to an html tag with options for the gravatar and for the img" 
   end
 end

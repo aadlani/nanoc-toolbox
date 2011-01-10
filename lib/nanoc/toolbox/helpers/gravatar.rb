@@ -131,7 +131,7 @@ module Nanoc::Toolbox::Helpers
 
       # Clean up and validates email
       def clean_email(email='')
-        raise ArgumentError.new('Invalid email') if email.empty? || email.index('@').nil? || email.size <= 6
+        raise ArgumentError.new('Invalid email') if email.empty? || email.index('@').nil? || email.index('@') == 0 || email.count('@') > 1 || email.size <= 6
         email.strip
       end
 
