@@ -108,7 +108,7 @@ Anouar ADLANI <anouar@adlani.com>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#breadcrumb_for-instance_method" title="#breadcrumb_for (instance method)">- (String) <strong>breadcrumb_for</strong>(identifier, params = {}) </a>
+      <a href="#breadcrumb_for-instance_method" title="#breadcrumb_for (instance method)">- (String) <strong>breadcrumb_for</strong>(identifier, options = {}) </a>
     
 
     
@@ -132,7 +132,7 @@ Generate a Breadcrumb for a given item.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#navigation_for-instance_method" title="#navigation_for (instance method)">- (String) <strong>navigation_for</strong>(identifier, params = {}) </a>
+      <a href="#navigation_for-instance_method" title="#navigation_for (instance method)">- (String) <strong>navigation_for</strong>(identifier, options = {}) </a>
     
 
     
@@ -156,7 +156,7 @@ Generate a navigation menu for a given item.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#render_menu-instance_method" title="#render_menu (instance method)">- (String) <strong>render_menu</strong>(items, params = {}) </a>
+      <a href="#render_menu-instance_method" title="#render_menu (instance method)">- (String) <strong>render_menu</strong>(items, options = {}) </a>
     
 
     
@@ -180,7 +180,7 @@ Render a Hash to a HTML List by default.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#toc_for-instance_method" title="#toc_for (instance method)">- (String) <strong>toc_for</strong>(item_rep, params = {}) </a>
+      <a href="#toc_for-instance_method" title="#toc_for (instance method)">- (String) <strong>toc_for</strong>(item_rep, options = {}) </a>
     
 
     
@@ -213,7 +213,7 @@ Generate a Table of Content for a given item.
       <div class="method_details first">
   <p class="signature first" id="breadcrumb_for-instance_method">
   
-    - (<tt>String</tt>) <strong>breadcrumb_for</strong>(identifier, params = {}) 
+    - (<tt>String</tt>) <strong>breadcrumb_for</strong>(identifier, options = {}) 
   
 
   
@@ -259,7 +259,7 @@ the identifier string of element
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <span class='name'>params</span>
+        <span class='name'>options</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -283,7 +283,7 @@ The Optional parameters
     
     
     
-    <h3>Options Hash (<tt>params</tt>):</h3>
+    <h3>Options Hash (<tt>options</tt>):</h3>
     <ul class="option">
       
         <li>
@@ -365,15 +365,15 @@ The output ready to be displayed by the caller
     <td>
       <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/navigation.rb', line 88</span>
 
-<span class='kw'>def</span> <span class='id breadcrumb_for'>breadcrumb_for</span><span class='lparen'>(</span><span class='id identifier'>identifier</span><span class='comma'>,</span> <span class='id params'>params</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id breadcrumb_for'>breadcrumb_for</span><span class='lparen'>(</span><span class='id identifier'>identifier</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 
-  <span class='comment'># Parse params or set to default values
-</span>  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ul</span><span class='tstring_end'>'</span></span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
+  <span class='comment'># Parse options or set to default values
+</span>  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ul</span><span class='tstring_end'>'</span></span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
 
   <span class='comment'># Retreive the breadcrumbs trail and format them
 </span>  <span class='id sections'>sections</span> <span class='op'>=</span> <span class='id find_breadcrumbs_trail'>find_breadcrumbs_trail</span><span class='lparen'>(</span><span class='id identifier'>identifier</span><span class='rparen'>)</span>
-  <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id sections'>sections</span><span class='comma'>,</span> <span class='id params'>params</span><span class='rparen'>)</span>
+  <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id sections'>sections</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -383,7 +383,7 @@ The output ready to be displayed by the caller
       <div class="method_details ">
   <p class="signature " id="navigation_for-instance_method">
   
-    - (<tt>String</tt>) <strong>navigation_for</strong>(identifier, params = {}) 
+    - (<tt>String</tt>) <strong>navigation_for</strong>(identifier, options = {}) 
   
 
   
@@ -428,7 +428,7 @@ the identifier string of the root element
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <span class='name'>params</span>
+        <span class='name'>options</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -452,7 +452,7 @@ The Optional parameters
     
     
     
-    <h3>Options Hash (<tt>params</tt>):</h3>
+    <h3>Options Hash (<tt>options</tt>):</h3>
     <ul class="option">
       
         <li>
@@ -551,14 +551,14 @@ The output ready to be displayed by the caller
     <td>
       <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/navigation.rb', line 22</span>
 
-<span class='kw'>def</span> <span class='id navigation_for'>navigation_for</span><span class='lparen'>(</span><span class='id identifier'>identifier</span><span class='comma'>,</span> <span class='id params'>params</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='comment'># Parse params or set to default values
-</span>  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span>            <span class='op'>||=</span> <span class='int'>3</span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ol</span><span class='tstring_end'>'</span></span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
+<span class='kw'>def</span> <span class='id navigation_for'>navigation_for</span><span class='lparen'>(</span><span class='id identifier'>identifier</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='comment'># Parse options or set to default values
+</span>  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span>            <span class='op'>||=</span> <span class='int'>3</span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ol</span><span class='tstring_end'>'</span></span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
 
   <span class='comment'># Decrease the depth level
-</span>  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>-=</span> <span class='int'>1</span>
+</span>  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>-=</span> <span class='int'>1</span>
 
   <span class='comment'># Get root item for which we need to draw the navigation
 </span>  <span class='id root'>root</span> <span class='op'>=</span> <span class='ivar'>@items</span><span class='period'>.</span><span class='id find'>find</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id i'>i</span><span class='op'>|</span> <span class='id i'>i</span><span class='period'>.</span><span class='id identifier'>identifier</span> <span class='op'>==</span> <span class='id identifier'>identifier</span> <span class='rbrace'>}</span>
@@ -568,7 +568,7 @@ The output ready to be displayed by the caller
 
   <span class='comment'># Find all sections, and render them
 </span>  <span class='id sections'>sections</span> <span class='op'>=</span> <span class='id find_item_tree'>find_item_tree</span><span class='lparen'>(</span><span class='id root'>root</span><span class='rparen'>)</span>
-  <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id sections'>sections</span><span class='comma'>,</span> <span class='id params'>params</span><span class='rparen'>)</span>
+  <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id sections'>sections</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -578,7 +578,7 @@ The output ready to be displayed by the caller
       <div class="method_details ">
   <p class="signature " id="render_menu-instance_method">
   
-    - (<tt>String</tt>) <strong>render_menu</strong>(items, params = {}) 
+    - (<tt>String</tt>) <strong>render_menu</strong>(items, options = {}) 
   
 
   
@@ -645,7 +645,7 @@ The array of links that need to be rendered
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <span class='name'>params</span>
+        <span class='name'>options</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -669,7 +669,7 @@ The Optional parameters
     
     
     
-    <h3>Options Hash (<tt>params</tt>):</h3>
+    <h3>Options Hash (<tt>options</tt>):</h3>
     <ul class="option">
       
         <li>
@@ -758,29 +758,29 @@ The output ready to be displayed by the caller
     <td>
       <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/navigation.rb', line 128</span>
 
-<span class='kw'>def</span> <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id items'>items</span><span class='comma'>,</span> <span class='id params'>params</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id items'>items</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 
-  <span class='comment'># Parse params or set to default values
-</span>  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span>            <span class='op'>||=</span> <span class='int'>3</span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ol</span><span class='tstring_end'>'</span></span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
+  <span class='comment'># Parse options or set to default values
+</span>  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span>            <span class='op'>||=</span> <span class='int'>3</span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ol</span><span class='tstring_end'>'</span></span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
 
   <span class='comment'># Decrease the depth level
-</span>  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>-=</span> <span class='int'>1</span>
+</span>  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>-=</span> <span class='int'>1</span>
 
   <span class='id rendered_menu'>rendered_menu</span> <span class='op'>=</span> <span class='id items'>items</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id item'>item</span><span class='op'>|</span>
     
     <span class='comment'># Render only if there is depth left
-</span>    <span class='kw'>if</span> <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_i'>to_i</span>  <span class='op'>&gt;=</span> <span class='int'>0</span> <span class='op'>&amp;&amp;</span> <span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:subsections</span><span class='rbracket'>]</span>
-      <span class='id output'>output</span> <span class='op'>=</span> <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:subsections</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id params'>params</span><span class='rparen'>)</span> 
-      <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>+=</span> <span class='int'>1</span> <span class='comment'># Increase the depth level after the call of navigation_for
+</span>    <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_i'>to_i</span>  <span class='op'>&gt;=</span> <span class='int'>0</span> <span class='op'>&amp;&amp;</span> <span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:subsections</span><span class='rbracket'>]</span>
+      <span class='id output'>output</span> <span class='op'>=</span> <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:subsections</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span> 
+      <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span> <span class='op'>+=</span> <span class='int'>1</span> <span class='comment'># Increase the depth level after the call of navigation_for
 </span>    <span class='kw'>end</span>
     <span class='id output'>output</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id content_tag'>content_tag</span><span class='lparen'>(</span><span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id link_to'>link_to</span><span class='lparen'>(</span><span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:link</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id output'>output</span><span class='rparen'>)</span>
+    <span class='id content_tag'>content_tag</span><span class='lparen'>(</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id link_to'>link_to</span><span class='lparen'>(</span><span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id item'>item</span><span class='lbracket'>[</span><span class='symbol'>:link</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id output'>output</span><span class='rparen'>)</span>
     
   <span class='kw'>end</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='rparen'>)</span>
   
-  <span class='id content_tag'>content_tag</span><span class='lparen'>(</span><span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id rendered_menu'>rendered_menu</span><span class='rparen'>)</span>
+  <span class='id content_tag'>content_tag</span><span class='lparen'>(</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id rendered_menu'>rendered_menu</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -790,7 +790,7 @@ The output ready to be displayed by the caller
       <div class="method_details ">
   <p class="signature " id="toc_for-instance_method">
   
-    - (<tt>String</tt>) <strong>toc_for</strong>(item_rep, params = {}) 
+    - (<tt>String</tt>) <strong>toc_for</strong>(item_rep, options = {}) 
   
 
   
@@ -833,7 +833,7 @@ the representation of desired item
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
-        <span class='name'>params</span>
+        <span class='name'>options</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -857,7 +857,7 @@ The Optional parameters
     
     
     
-    <h3>Options Hash (<tt>params</tt>):</h3>
+    <h3>Options Hash (<tt>options</tt>):</h3>
     <ul class="option">
       
         <li>
@@ -962,14 +962,14 @@ The output ready to be displayed by the caller
     <td>
       <pre class="code"><span class="info file"># File 'lib/nanoc/toolbox/helpers/navigation.rb', line 55</span>
 
-<span class='kw'>def</span> <span class='id toc_for'>toc_for</span><span class='lparen'>(</span><span class='id item_rep'>item_rep</span><span class='comma'>,</span> <span class='id params'>params</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id toc_for'>toc_for</span><span class='lparen'>(</span><span class='id item_rep'>item_rep</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>nokogiri</span><span class='tstring_end'>'</span></span>
   
-  <span class='comment'># Parse params or set to default values
-</span>  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span>            <span class='op'>||=</span> <span class='int'>3</span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ol</span><span class='tstring_end'>'</span></span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
-  <span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span>             <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>div[@class=&quot;section&quot;]</span><span class='tstring_end'>'</span></span>
+  <span class='comment'># Parse options or set to default values
+</span>  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:depth</span><span class='rbracket'>]</span>            <span class='op'>||=</span> <span class='int'>3</span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:collection_tag</span><span class='rbracket'>]</span>   <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ol</span><span class='tstring_end'>'</span></span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:item_tag</span><span class='rbracket'>]</span>         <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>li</span><span class='tstring_end'>'</span></span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span>             <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>div[@class=&quot;section&quot;]</span><span class='tstring_end'>'</span></span>
   
   <span class='comment'># Retreive the parsed content and init nokogiri
 </span>  <span class='id compiled_content'>compiled_content</span> <span class='op'>=</span> <span class='id item_rep'>item_rep</span><span class='period'>.</span><span class='id instance_eval'>instance_eval</span> <span class='lbrace'>{</span> <span class='ivar'>@content</span><span class='lbracket'>[</span><span class='symbol'>:pre</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -977,8 +977,8 @@ The output ready to be displayed by the caller
   <span class='id doc_root'>doc_root</span> <span class='op'>=</span> <span class='id doc'>doc</span><span class='period'>.</span><span class='id xpath'>xpath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/html/body</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id first'>first</span>
   
   <span class='comment'># Find all sections, and render them
-</span>  <span class='id sections'>sections</span> <span class='op'>=</span> <span class='id find_toc_sections'>find_toc_sections</span><span class='lparen'>(</span><span class='id doc_root'>doc_root</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id params'>params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
-  <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id sections'>sections</span><span class='comma'>,</span> <span class='id params'>params</span><span class='rparen'>)</span>
+</span>  <span class='id sections'>sections</span> <span class='op'>=</span> <span class='id find_toc_sections'>find_toc_sections</span><span class='lparen'>(</span><span class='id doc_root'>doc_root</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
+  <span class='id render_menu'>render_menu</span><span class='lparen'>(</span><span class='id sections'>sections</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -990,7 +990,7 @@ The output ready to be displayed by the caller
 </div>
     
     <div id="footer">
-  Generated on Sat Jan  8 02:02:50 2011 by 
+  Generated on Mon Jan 10 23:19:07 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>
