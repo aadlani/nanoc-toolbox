@@ -63,15 +63,19 @@ describe Nanoc::Toolbox::Helpers::Gravatar do
   describe "#gravatar_image" do
     
     it "converts an email to an html tag" do
-      gravatar_image(@email).should == %[<img src='#{@secure_host[false]}' />]
+      gravatar_image(@email).should == %[<img src="#{@secure_host[false]}" />]
     end
     
     it "converts an email to an html tag with options for the gravatar" do
-      gravatar_image(@email,  :size => 45, :default_icon => 'monsterid', :rating => 'xss').should == %[<img src='#{@secure_host[false]}?default_icon=monsterid&size=45' />]
+      gravatar_image(@email,  :size => 45, :default_icon => 'monsterid', :rating => 'xss').should == %[<img src="#{@secure_host[false]}?default_icon=monsterid&size=45" />]
     end
     
-    it "converts an email to an html tag with options for the img tag"
+    it "converts an email to an html tag with options for the img tag" do
+      gravatar_image(@email,  :height => 10).should == %[<img height="10" src="#{@secure_host[false]}" />]
+    end
     
-    it "converts an email to an html tag with options for the gravatar and for the img" 
+    it "converts an email to an html tag with options for the gravatar and for the img" do
+      gravatar_image(@email,  :height => 10, :size => 45, :default_icon => 'monsterid', :rating => 'xss').should == %[<img height="10" src="#{@secure_host[false]}?default_icon=monsterid&size=45" />]
+    end
   end
 end

@@ -13,20 +13,20 @@ module Nanoc::Toolbox::Helpers
     # the descendent of the passed item.
     # 
     # @param  [String]  identifier - the identifier string of the root element
-    # @param  [Hash]    params - The Optional parameters
-    # @option params [Interger] :depth (3) maximum depth of the rendered menu
-    # @option params [String] :collection_tag ('ol') collection englobing tag name
-    # @option params [String] :item_tag ('li') item englobing tag name
+    # @param  [Hash]    options - The Optional parameters
+    # @option options [Interger] :depth (3) maximum depth of the rendered menu
+    # @option options [String] :collection_tag ('ol') collection englobing tag name
+    # @option options [String] :item_tag ('li') item englobing tag name
     # 
     # @return [String] The output ready to be displayed by the caller
-    def navigation_for(identifier, params={})
-      # Parse params or set to default values
-      params[:depth]            ||= 3
-      params[:collection_tag]   ||= 'ol'
-      params[:item_tag]         ||= 'li'
+    def navigation_for(identifier, options={})
+      # Parse options or set to default values
+      options[:depth]            ||= 3
+      options[:collection_tag]   ||= 'ol'
+      options[:item_tag]         ||= 'li'
     
       # Decrease the depth level
-      params[:depth] -= 1
+      options[:depth] -= 1
     
       # Get root item for which we need to draw the navigation
       root = @items.find { |i| i.identifier == identifier }
@@ -36,7 +36,7 @@ module Nanoc::Toolbox::Helpers
     
       # Find all sections, and render them
       sections = find_item_tree(root)
-      render_menu(sections, params)
+      render_menu(sections, options)
     end
   
   
@@ -44,22 +44,22 @@ module Nanoc::Toolbox::Helpers
     # form the item content. The parsing is done with Nokogiri through XPath.
     # 
     # @param  [String]  item_rep - the representation of desired item
-    # @param  [Hash]    params - The Optional parameters
-    # @option params [Interger] :depth (3) maximum depth of the rendered menu
-    # @option params [String] :collection_tag ('ol') collection englobing tag name
-    # @option params [String] :item_tag ('li') item englobing tag name
+    # @param  [Hash]    options - The Optional parameters
+    # @option options [Interger] :depth (3) maximum depth of the rendered menu
+    # @option options [String] :collection_tag ('ol') collection englobing tag name
+    # @option options [String] :item_tag ('li') item englobing tag name
     # 
     # @return [String] The output ready to be displayed by the caller
     #
     # @see http://nokogiri.org/
-    def toc_for(item_rep, params={})
+    def toc_for(item_rep, options={})
       require 'nokogiri'
       
-      # Parse params or set to default values
-      params[:depth]            ||= 3
-      params[:collection_tag]   ||= 'ol'
-      params[:item_tag]         ||= 'li'
-      params[:path]             ||= 'div[@class="section"]'
+      # Parse options or set to default values
+      options[:depth]            ||= 3
+      options[:collection_tag]   ||= 'ol'
+      options[:item_tag]         ||= 'li'
+      options[:path]             ||= 'div[@class="section"]'
       
       # Retreive the parsed content and init nokogiri
       compiled_content = item_rep.instance_eval { @content[:pre] }
@@ -67,8 +67,8 @@ module Nanoc::Toolbox::Helpers
       doc_root = doc.xpath('/html/body').first
       
       # Find all sections, and render them
-      sections = find_toc_sections(doc_root, "#{params[:path]}", 2)
-      render_menu(sections, params)
+      sections = find_toc_sections(doc_root, "#{options[:path]}", 2)
+      render_menu(sections, options)
     end
   
   
@@ -78,22 +78,22 @@ module Nanoc::Toolbox::Helpers
     # Requires the Helper: Nanoc3::Helpers::Breadcrumbs
     # 
     # @param  [String]  identifier - the identifier string of element
-    # @param  [Hash]    params - The Optional parameters
-    # @option params [String] :collection_tag ('ol') collection englobing tag name
-    # @option params [String] :item_tag ('li') item englobing tag name
+    # @param  [Hash]    options - The Optional parameters
+    # @option options [String] :collection_tag ('ol') collection englobing tag name
+    # @option options [String] :item_tag ('li') item englobing tag name
     # 
     # @return [String] The output ready to be displayed by the caller
     #
     # @see Nanoc3::Helpers::Breadcrumbs#breadcrumbs_for_identifier
-    def breadcrumb_for(identifier, params={})
+    def breadcrumb_for(identifier, options={})
     
-      # Parse params or set to default values
-      params[:collection_tag]   ||= 'ul'
-      params[:item_tag]         ||= 'li'
+      # Parse options or set to default values
+      options[:collection_tag]   ||= 'ul'
+      options[:item_tag]         ||= 'li'
     
       # Retreive the breadcrumbs trail and format them
       sections = find_breadcrumbs_trail(identifier)
-      render_menu(sections, params)
+      render_menu(sections, options)
     end
   
     # Render a Hash to a HTML List by default
@@ -120,42 +120,37 @@ module Nanoc::Toolbox::Helpers
     #   </ul>
     #
     # @param  [Array]  items - The array of links that need to be rendered
-    # @param  [Hash]    params - The Optional parameters
-    # @option params [String] :collection_tag ('ol') collection englobing tag name
-    # @option params [String] :item_tag ('li') item englobing tag name
+    # @param  [Hash]    options - The Optional parameters
+    # @option options [String] :collection_tag ('ol') collection englobing tag name
+    # @option options [String] :item_tag ('li') item englobing tag name
     # 
     # @return [String] The output ready to be displayed by the caller
-    def render_menu(items, params={})
+    def render_menu(items, options={})
 
-      # Parse params or set to default values
-      params[:depth]            ||= 3
-      params[:collection_tag]   ||= 'ol'
-      params[:item_tag]         ||= 'li'
+      # Parse options or set to default values
+      options[:depth]            ||= 3
+      options[:collection_tag]   ||= 'ol'
+      options[:item_tag]         ||= 'li'
     
       # Decrease the depth level
-      params[:depth] -= 1
+      options[:depth] -= 1
     
       rendered_menu = items.map do |item|
         
         # Render only if there is depth left
-        if params[:depth].to_i  >= 0 && item[:subsections]
-          output = render_menu(item[:subsections], params) 
-          params[:depth] += 1 # Increase the depth level after the call of navigation_for
+        if options[:depth].to_i  >= 0 && item[:subsections]
+          output = render_menu(item[:subsections], options) 
+          options[:depth] += 1 # Increase the depth level after the call of navigation_for
         end
         output ||= ""
-        content_tag(params[:item_tag], link_to(item[:title], item[:link]) + output)
+        content_tag(options[:item_tag], link_to(item[:title], item[:link]) + output)
         
       end.join()
       
-      content_tag(params[:collection_tag], rendered_menu)
+      content_tag(options[:collection_tag], rendered_menu)
     end
   
     private
-
-      # Really basic Helper Method that wrap a content within an HTML Tag
-      def content_tag(name, content="", &block)
-        "<#{name}>#{content}</#{name}>"
-      end
     
       # Recursive method that extract from an XPath pattern the document structure 
       # and return the "permalinks" to each sections in an Array of Hash that 

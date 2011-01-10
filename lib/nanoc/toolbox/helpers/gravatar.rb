@@ -8,7 +8,7 @@ module Nanoc::Toolbox::Helpers
   # @see http://en.gravatar.com/
   #
   # @author Anouar ADLANI <anouar@adlani.com>
-  module Gravatar
+  module Gravatar    
 
     # Gravatar avatar image base URL
     URL = { :http   => "http://gravatar.com/avatar/",
@@ -42,7 +42,8 @@ module Nanoc::Toolbox::Helpers
     # @option options (see #build_options_parameters)
     def gravatar_image(email, options={})
       image_url = gravatar_url(email, options)
-      "<img src='#{image_url}' />"
+      options.delete_if {|key, value| GRAVATAR_OPTIONS.include?(key) }
+      tag('img', options.merge(:src => image_url))
     end
 
 
