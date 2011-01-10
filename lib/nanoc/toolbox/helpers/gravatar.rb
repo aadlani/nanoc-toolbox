@@ -1,3 +1,5 @@
+require 'nanoc/toolbox/helpers/html_tag'
+
 module Nanoc::Toolbox::Helpers
 
   # NANOC Helper for the Gravatar avatars
@@ -9,6 +11,7 @@ module Nanoc::Toolbox::Helpers
   #
   # @author Anouar ADLANI <anouar@adlani.com>
   module Gravatar    
+    include Nanoc::Toolbox::Helpers::HtmlTag
 
     # Gravatar avatar image base URL
     URL = { :http   => "http://gravatar.com/avatar/",
