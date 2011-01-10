@@ -1,5 +1,6 @@
 require 'nanoc/toolbox/version'
 require 'nanoc/toolbox/helpers'
+require 'nanoc/toolbox/filters'
 
 # The namescope of the project
 module Nanoc
