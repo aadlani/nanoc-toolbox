@@ -2,8 +2,13 @@
 
 ## developement
 
+## Release 0.0.3
+
 * NEW: 		Gravatar Helper
 * CHANGED:	Better Yardoc documentation
+* NEW:		RSpec tests
+* NEW:		HTML Tag Helper
+* NEW:		HtlmTidy Filter
 
 ## Release 0.0.2
 

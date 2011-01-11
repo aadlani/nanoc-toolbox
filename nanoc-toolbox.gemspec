@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
 
   s.add_dependency "nanoc", ">= 3.1.6"
+  s.add_dependency "nokogiri", ">= 1.4.4"
   
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "rspec", ">= 1.0.0"
