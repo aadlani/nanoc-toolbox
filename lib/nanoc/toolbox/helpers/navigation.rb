@@ -1,7 +1,6 @@
 require 'nanoc/toolbox/helpers/html_tag'
 
-module Nanoc::Toolbox::Helpers
-
+module Nanoc::Toolbox::Helpers  
   # NANOC Helper for the Navigation related stuff.
   #
   # This module contains functions for generating navigation menus for your
@@ -9,6 +8,7 @@ module Nanoc::Toolbox::Helpers
   #
   # @author Anouar ADLANI <anouar@adlani.com>
   module Navigation
+    include Nanoc3::Helpers::LinkTo
     include Nanoc::Toolbox::Helpers::HtmlTag
 
     # Generate a navigation menu for a given item.
@@ -28,9 +28,6 @@ module Nanoc::Toolbox::Helpers
       options[:depth]            ||= 3
       options[:collection_tag]   ||= 'ol'
       options[:item_tag]         ||= 'li'
-
-      # Decrease the depth level
-      options[:depth] -= 1
 
       # Get root item for which we need to draw the navigation
       root = @items.find { |i| i.identifier == identifier }
@@ -71,7 +68,7 @@ module Nanoc::Toolbox::Helpers
       doc_root = doc.xpath('/html/body').first
 
       # Find all sections, and render them
-      sections = find_toc_sections(doc_root, "#{options[:path]}", 2)
+      sections = find_toc_sections(doc_root, options[:path])
       render_menu(sections, options)
     end
 
@@ -142,7 +139,7 @@ module Nanoc::Toolbox::Helpers
       rendered_menu = items.map do |item|
 
         # Render only if there is depth left
-        if options[:depth].to_i  >= 0 && item[:subsections]
+        if options[:depth].to_i  > 0 && item[:subsections]
           output = render_menu(item[:subsections], options)
           options[:depth] += 1 # Increase the depth level after the call of navigation_for
         end
@@ -151,7 +148,7 @@ module Nanoc::Toolbox::Helpers
 
       end.join()
 
-      content_tag(options[:collection_tag], rendered_menu)
+      content_tag(options[:collection_tag], rendered_menu) unless rendered_menu.empty?
     end
 
     private
