@@ -1,19 +1,23 @@
 # nanoc-toolbox
 
+!!! THIS LIBRARY IS STILL UNDER DEVELOPMENT !!!
+
 ## Presentation
 
-The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc
+The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc.
 
 ## Features
 
 * Navigation Helper
+* Gravatar Helper
+* HtmlTag Helper
 
 ## Requirements
 
 * nanoc3
+* Nokogiri
 
-
-## Instalation
+## Installation
 
 To use the nanoc-toolbox, you have to start by installing the gem.
 
@@ -34,6 +38,7 @@ The following example shows a sample helpers_.rb file in the lib directory
 
     # Custom Helpers
     include Nanoc::Toolbox::Helpers::Navigation
+    include Nanoc::Toolbox::Helpers::Gravatar
 
 ## Acknowledgments
 
