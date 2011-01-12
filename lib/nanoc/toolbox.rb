@@ -1,3 +1,4 @@
+require 'nanoc3'
 require 'nanoc/toolbox/version'
 require 'nanoc/toolbox/helpers'
 require 'nanoc/toolbox/filters'
