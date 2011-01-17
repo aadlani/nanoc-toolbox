@@ -18,17 +18,10 @@ module Nanoc::Toolbox::Helpers
     #
     # @param  [String]  identifier - the identifier string of the root element
     # @param  [Hash]    options - The Optional parameters
-    # @option options [Interger] :depth (3) maximum depth of the rendered menu
-    # @option options [String] :collection_tag ('ol') collection englobing tag name
-    # @option options [String] :item_tag ('li') item englobing tag name
+    # @option options (see #render_menu)
     #
     # @return [String] The output ready to be displayed by the caller
     def navigation_for(identifier, options={})
-      # Parse options or set to default values
-      options[:depth]            ||= 3
-      options[:collection_tag]   ||= 'ol'
-      options[:item_tag]         ||= 'li'
-
       # Get root item for which we need to draw the navigation
       root = @items.find { |i| i.identifier == identifier }
 
@@ -46,9 +39,7 @@ module Nanoc::Toolbox::Helpers
     #
     # @param  [String]  item_rep - the representation of desired item
     # @param  [Hash]    options - The Optional parameters
-    # @option options [Interger] :depth (3) maximum depth of the rendered menu
-    # @option options [String] :collection_tag ('ol') collection englobing tag name
-    # @option options [String] :item_tag ('li') item englobing tag name
+    # @option options (see #render_menu)
     #
     # @return [String] The output ready to be displayed by the caller
     #
@@ -57,9 +48,6 @@ module Nanoc::Toolbox::Helpers
       require 'nokogiri'
 
       # Parse options or set to default values
-      options[:depth]            ||= 3
-      options[:collection_tag]   ||= 'ol'
-      options[:item_tag]         ||= 'li'
       options[:path]             ||= 'div[@class="section"]'
 
       # Retreive the parsed content and init nokogiri
@@ -80,8 +68,7 @@ module Nanoc::Toolbox::Helpers
     #
     # @param  [String]  identifier - the identifier string of element
     # @param  [Hash]    options - The Optional parameters
-    # @option options [String] :collection_tag ('ol') collection englobing tag name
-    # @option options [String] :item_tag ('li') item englobing tag name
+    # @option options (see #render_menu)
     #
     # @return [String] The output ready to be displayed by the caller
     #
@@ -90,8 +77,7 @@ module Nanoc::Toolbox::Helpers
 
       # Parse options or set to default values
       options[:collection_tag]   ||= 'ul'
-      options[:item_tag]         ||= 'li'
-
+      
       # Retreive the breadcrumbs trail and format them
       sections = find_breadcrumbs_trail(identifier)
       render_menu(sections, options)
@@ -122,8 +108,11 @@ module Nanoc::Toolbox::Helpers
     #
     # @param  [Array]  items - The array of links that need to be rendered
     # @param  [Hash]    options - The Optional parameters
-    # @option options [String] :collection_tag ('ol') collection englobing tag name
-    # @option options [String] :item_tag ('li') item englobing tag name
+    # @option options [Interger] :depth (3) maximum depth of the rendered menu
+    # @option options [String] :collection_tag ('ol') tag englobing collection of items
+    # @option options [String] :item_tag ('li') tag englobing item
+    # @option options [String] :title_tag ('h2') tag englobing the title
+    # @option options [String] :title ('') Title of the menu, if nil will not display title
     #
     # @return [String] The output ready to be displayed by the caller
     def render_menu(items, options={})
@@ -132,7 +121,14 @@ module Nanoc::Toolbox::Helpers
       options[:depth]            ||= 3
       options[:collection_tag]   ||= 'ol'
       options[:item_tag]         ||= 'li'
-
+      options[:title_tag]        ||= 'h2'
+      options[:title]            ||= nil
+      
+      # Parse the title and remove it from the options
+      title =  options[:title] ? content_tag(options[:title_tag], options[:title]) : ''
+      options.delete(:title_tag) 
+      options.delete(:title) 
+      
       # Decrease the depth level
       options[:depth] -= 1
 
@@ -148,7 +144,8 @@ module Nanoc::Toolbox::Helpers
 
       end.join()
 
-      content_tag(options[:collection_tag], rendered_menu) unless rendered_menu.empty?
+      
+      title + content_tag(options[:collection_tag], rendered_menu) unless rendered_menu.strip.empty?
     end
 
     private
@@ -163,11 +160,10 @@ module Nanoc::Toolbox::Helpers
         # For each section found call the find_toc_sections on it with an
         # increased header level (ex: h1 => h2) and then generate the hash res
         sections = section.xpath(section_xpath).map do |subsection|
-          header = subsection.xpath("h#{title_level}").first
+          header = subsection.css("h1, h2, h3, h4, h5, h6").first
           sub_id = subsection['id']
-          sub_title = header.inner_html if header
+          sub_title = header ? header.inner_html : 'untitled'
           subsections = {}
-
 
           if subsection.xpath("#{section_xpath}") && title_level <= 6
             subsections = find_toc_sections(subsection, "#{section_xpath}", title_level+1)
