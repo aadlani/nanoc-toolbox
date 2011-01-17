@@ -12,6 +12,9 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
 * Gravatar Helper
 * HtmlTag Helper
 
+* AddSection Filter
+* HtmlTidy Filter
+
 ## Requirements
 
 * nanoc3
