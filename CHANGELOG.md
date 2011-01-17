@@ -1,14 +1,17 @@
 # Changelog
 
 ## developement
+* NEW:      add_section Filter
+* CHANGED:  bugfix on navigation helper
+
 
 ## Release 0.0.3
 
-* NEW: 		Gravatar Helper
+* NEW: 		  Gravatar Helper
 * CHANGED:	Better Yardoc documentation
-* NEW:		RSpec tests
-* NEW:		HTML Tag Helper
-* NEW:		HtlmTidy Filter
+* NEW:		  RSpec tests
+* NEW:		  HTML Tag Helper
+* NEW:		  HtlmTidy Filter
 
 ## Release 0.0.2
 
