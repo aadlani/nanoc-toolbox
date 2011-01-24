@@ -1,9 +1,13 @@
 # Changelog
 
 ## developement
-* NEW:      add_section Filter
-* CHANGED:  bugfix on navigation helper
 
+## Release 0.0.5
+* CHANGED:  add the ability to filter by an attributes of an item on navigation_for
+
+## Release 0.0.4
+* NEW:      add_section Filter
+* CHANGED:  bugfix on navigation helper 
 
 ## Release 0.0.3
 
@@ -21,5 +25,4 @@
 * NEW:      Add Yardoc
 
 ## Release 0.0.1
-
 * First Release

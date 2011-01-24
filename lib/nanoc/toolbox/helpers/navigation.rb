@@ -19,6 +19,7 @@ module Nanoc::Toolbox::Helpers
     # @param  [String]  identifier - the identifier string of the root element
     # @param  [Hash]    options - The Optional parameters
     # @option options (see #render_menu)
+    # @option options [String] :kind ('article') The kind of items to display in the menu
     #
     # @return [String] The output ready to be displayed by the caller
     def navigation_for(identifier, options={})
@@ -29,7 +30,7 @@ module Nanoc::Toolbox::Helpers
       return nil unless root.children
 
       # Find all sections, and render them
-      sections = find_item_tree(root)
+      sections = find_item_tree(root, options)
       render_menu(sections, options)
     end
 
@@ -40,7 +41,8 @@ module Nanoc::Toolbox::Helpers
     # @param  [String]  item_rep - the representation of desired item
     # @param  [Hash]    options - The Optional parameters
     # @option options (see #render_menu)
-    #
+    # @option options [String] :path ('div[@class="section"]') Generic XPath for the sections
+    # 
     # @return [String] The output ready to be displayed by the caller
     #
     # @see http://nokogiri.org/
@@ -140,7 +142,7 @@ module Nanoc::Toolbox::Helpers
           options[:depth] += 1 # Increase the depth level after the call of navigation_for
         end
         output ||= ""
-        content_tag(options[:item_tag], link_to(item[:title], item[:link]) + output)
+        content_tag(options[:item_tag], link_to_unless_current(item[:title], item[:link]) + output)
 
       end.join()
 
@@ -175,11 +177,14 @@ module Nanoc::Toolbox::Helpers
       # Recursive method that extract from an XPath pattern the document structure
       # and return the "permalinks" in a Array of Hash that could be used by the
       # rendering method
-      def find_item_tree(root)
+      def find_item_tree(root, options={})
         return nil unless root.children
-
+        
+        # filter the elements to contain only the kind requested
+        children = options[:kind] ? root.children.select { |item| item[:kind] == options[:kind] } : root.children
+        
         # For each child call the find_item_tree on it and then generate the hash
-        sections = root.children.map do |child|
+        sections = children.map do |child|
           subsections = find_item_tree(child)
 
           { :title        => (child[:title] || child.identifier),
