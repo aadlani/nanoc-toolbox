@@ -15,7 +15,7 @@ module Nanoc::Toolbox::Helpers
       @config[:post_dirs] ||= ['_posts', '_articles']
       items.each do |item|
         # check the item's parent directory against the post_dirs
-        if @config[:post_dirs].include? File.dirname(item[:filename]).split('/').last
+        if (item[:filename] && @config[:post_dirs].include?(File.dirname(item[:filename]).split('/').last))
           act_as_post(item)
         end
       end

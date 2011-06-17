@@ -62,6 +62,7 @@ module Nanoc::Toolbox::Helpers
       }
 
       @items.each do |item|
+        next unless item[:kind] == 'article'
         search_terms_for(item).each do |term|
           index["terms"][term] ||= []
           index["terms"][term] << id
@@ -76,7 +77,7 @@ module Nanoc::Toolbox::Helpers
           puts "Indexed: #{term}"
         end
         index["items"][id] = {
-          "url" => "#{permalink(item)}",
+          "url" => "#{url_for(item)}",
           "title" => item[:title]
         }
         id += 1
