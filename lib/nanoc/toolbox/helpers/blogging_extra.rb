@@ -14,7 +14,8 @@ module Nanoc::Toolbox::Helpers
     def add_post_attributes
       @config[:post_dirs] ||= ['_posts', '_articles']
       items.each do |item|
-        if @config[:post_dirs].include? item[:filename]
+        # check the item's parent directory against the post_dirs
+        if @config[:post_dirs].include? File.dirname(item[:filename]).split('/').last
           act_as_post(item)
         end
       end
