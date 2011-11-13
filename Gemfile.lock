@@ -1,20 +1,22 @@
 PATH
   remote: .
   specs:
-    nanoc-toolbox (0.0.3)
+    nanoc-toolbox (0.0.5)
+      jsmin (>= 1.0.1)
       nanoc (>= 3.1.6)
       nokogiri (>= 1.4.4)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    cri (1.0.1)
+    cri (2.0.2)
     diff-lcs (1.1.2)
-    nanoc (3.1.6)
-      nanoc3 (>= 3.1.6)
-    nanoc3 (3.1.6)
-      cri (>= 1.0.0)
-    nokogiri (1.4.4)
+    jsmin (1.0.1)
+    nanoc (3.2.3)
+      nanoc3 (>= 3.2.3)
+    nanoc3 (3.2.3)
+      cri (~> 2.0)
+    nokogiri (1.5.0)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -29,7 +31,5 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 1.0.0)
-  nanoc (>= 3.1.6)
   nanoc-toolbox!
-  nokogiri (>= 1.4.4)
   rspec (>= 1.0.0)
