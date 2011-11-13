@@ -1,6 +1,6 @@
 # nanoc-toolbox
 
-!!! THIS LIBRARY IS STILL UNDER DEVELOPMENT !!!
+[![Build Status](https://secure.travis-ci.org/aadlani/nanoc-toolbox.png)](http://travis-ci.org/aadlani/nanoc-toolbox)
 
 ## Presentation
 
