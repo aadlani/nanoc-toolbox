@@ -13,18 +13,19 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
  * **Navigation**: Menu, Breadcrumb, Table of contents, 
  * **Gravatar**: Avatar Using the Gravatar System
  * **HtmlTag**: HTML Tag helper for other helpers
+ * **Google Analytics***: Generate the JS code snipet for Analytics
 
 ### Filters
 
- * **AddSection**:
- * **HtmlTidy**:
+ * **AddSection**: Section div's based on headers
+ * **HtmlTidy**: Clean up the generated html code with Nokogiri
  * **JS Minify**: Minifies the JS files using JSMin
 
 ## Requirements
 
- * nanoc3
- * Nokogiri
- * jsmin
+ * **nanoc3**: It requires obviously the Nanoc gem
+ * **Nokogiri**: For the HTML Tidy Filter
+ * **jsmin**: For the JS Minify Filter
 
 ## Installation
 
