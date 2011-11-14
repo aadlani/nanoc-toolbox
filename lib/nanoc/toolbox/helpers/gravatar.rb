@@ -104,7 +104,7 @@ module Nanoc::Toolbox::Helpers
         return '' if options.empty?
 
         # Build the parameters string
-        '?' + options.sort.map { |e|  e = e.join('=') if e.size == 2}.join('&')
+        '?' + options.sort{|a,b| a.to_s <=> b.to_s}.map{ |e| e = e.join('=') if e.size == 2}.join('&')
       end
 
     private

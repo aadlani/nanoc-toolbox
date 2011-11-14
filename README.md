@@ -21,8 +21,9 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
  * **HtmlTidy**: Clean up the generated html code with Nokogiri
  * **JS Minify**: Minifies the JS files using JSMin
 
-## Requirements
+## Requirements and compatibility
 
+ * **ruby >= 1.8.7**: This gem has been tested against ruby 1.8.7 and 1.9.2
  * **nanoc3**: It requires obviously the Nanoc gem
  * **Nokogiri**: For the HTML Tidy Filter
  * **jsmin**: For the JS Minify Filter
