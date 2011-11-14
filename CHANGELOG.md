@@ -3,6 +3,10 @@
 ## developement
 
 ## Release 0.0.5
+* NEW:      Analytics Helper
+* NEW:      JS Minify Filter
+
+## Release 0.0.5
 * CHANGED:  add the ability to filter by an attributes of an item on navigation_for
 
 ## Release 0.0.4
