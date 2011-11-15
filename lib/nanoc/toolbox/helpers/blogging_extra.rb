@@ -52,6 +52,7 @@ module Nanoc::Toolbox::Helpers
       
       item[:slug] = File.basename(item[:filename], File.extname(item[:filename]))
       item[:slug].gsub!(/\s+/, '-')
+      item[:slug]
     end
     
     
