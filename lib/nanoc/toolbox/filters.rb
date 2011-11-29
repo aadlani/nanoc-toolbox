@@ -1,6 +1,5 @@
 require 'nanoc/toolbox/filters/html_tidy'
 require 'nanoc/toolbox/filters/add_sections'
-require 'nanoc/toolbox/filters/rdiscount_smart'
 require 'nanoc/toolbox/filters/js_minify'
 
 

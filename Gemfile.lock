@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nanoc-toolbox (0.0.6)
+    nanoc-toolbox (0.0.8)
       jsmin (>= 1.0.1)
       nanoc (>= 3.1.6)
       nokogiri (>= 1.4.4)
