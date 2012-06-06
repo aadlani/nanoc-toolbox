@@ -32,7 +32,7 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
 
 To use the nanoc-toolbox, you have to start by installing the gem.
 
-    gem install nanox-toolbox
+    gem install nanoc-toolbox
 
 Then require the project main file in your default.rb file in the lib directory of your nanoc project.
 
