@@ -13,9 +13,8 @@ module Nanoc::Toolbox::Helpers
     include Nanoc::Toolbox::Helpers::HtmlTag
     
     def ga_tracking_snippet(ga_tracking_code=nil)
-      ga_tracking_code ||= @site.config[:ga_tracking_code]
+      ga_tracking_code ||= @config[:ga_tracking_code] || "UA-xxxxxx-x"
       js = <<-EOS
-        
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', '#{ga_tracking_code}']);
         _gaq.push(['_trackPageview']);
@@ -23,9 +22,8 @@ module Nanoc::Toolbox::Helpers
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          var s  = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
-        
       EOS
       content_tag('script', js, { :type => 'text/javascript' })
     end
