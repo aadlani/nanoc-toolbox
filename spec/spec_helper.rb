@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require "rspec/core"
 require 'rspec/mocks'
 require "nanoc/toolbox"
