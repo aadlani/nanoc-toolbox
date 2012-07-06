@@ -11,7 +11,7 @@ module Nanoc::Toolbox::Helpers
     include Nanoc3::Helpers::Blogging
 
     def add_post_attributes
-      @site.config[:post_dirs] ||= ['_posts', '_articles']
+      @config[:post_dirs] ||= ['_posts', '_articles']
       items.each do |item|
         # check the item's parent directory against the post_dirs
         if (item[:filename] && @config[:post_dirs].include?(File.dirname(item[:filename]).split('/').last))
@@ -71,16 +71,19 @@ module Nanoc::Toolbox::Helpers
       tags = []
       return tags unless item[:tags]
 
-      options[:title]           ||= ""
-      options[:url_tag_pattern] ||= "%%tag%%"
-      options[:url_format]      ||= "/tags/#{options[:url_tag_pattern]}.html"
+      options[:tag_pattern]     ||= "%%tag%%"
+      options[:title]           ||= options[:tag_pattern]
+      options[:file_extension]  ||= ".html"
+      options[:url_format]      ||= "/tags/#{options[:tag_pattern]}#{options[:file_extension]}"
 
       item[:tags].each do |tag|
         unless omit_tags.include? tag
-					url = options[:url_format].gsub(options[:url_tag_pattern], tag.downcase)
-          tags << content_tag('a', tag, {:href => url})
+          title = options[:title].gsub(options[:tag_pattern], tag.downcase)
+					url = options[:url_format].gsub(options[:tag_pattern], tag.downcase)
+          tags << content_tag('a', title, {:href => url})
         end
       end
+
       return tags
     end
     

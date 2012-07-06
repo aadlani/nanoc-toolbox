@@ -2,10 +2,12 @@ require "spec_helper"
 
 class BloggingExtraDummyClass
   include Nanoc::Toolbox::Helpers::BloggingExtra
+  def initialize
+    @config = {} 
+  end
 end
 
 describe Nanoc::Toolbox::Helpers::BloggingExtra do
-  
 
   subject { BloggingExtraDummyClass.new }
 
@@ -39,8 +41,8 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
     end
 
     it "generates the same number of links than tags" do
-      item = { :tags => %W[a b c d e f] }
-      subject.tag_links_for(item).size.should == 6
+      tags = %W[a b c d e f]
+      subject.tag_links_for({ :tags => tags }).size.should == 6
     end
     
     it "excludes the tags passed as second parameter" do
@@ -51,21 +53,38 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
       generated_links.size.should == (item[:tags].size - omited.size)
 
       omited.each do |t|
-        generated_links.should_not include("<a href=\"/#{t}\"")
+        generated_links.should_not include("<a href=\"/tags/#{t}.html\">#{t}</a>")
       end
     end
 
-    it "handle the URL format passed in param" do
+    it "handle the tag format in the URL and title passed in param" do
+      tags = %W[a b c d e f]
+      item = { :tags => tags }
       omited = []
-      item = { :tags => %W[a b c d e f] }
-      options = {:title => "", :url_tag_pattern => "", :url_format => ""}
-      pending "TODO"  
+      options = { :title => "all articles tagged with %%TAGNAME%%", :tag_pattern => "%%TAGNAME%%", :url_format => "/tags/tag_%%TAGNAME%%.html"}
+
+      generated_links = subject.tag_links_for(item, omited, options)
+      tags.each do |t|
+        generated_links.should include("<a href=\"/tags/tag_#{t}.html\">all articles tagged with #{t}</a>")
+      end
     end
 
-    it "handle the TAG format passed in param"
-    it "handle the TITLE format passed in param"
   end
   
+  describe ".add_post_attributes" do
+    it "defines the items as posts when located in the defined folders" do
+      articles = [
+        Nanoc3::Item.new("", { :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
+        Nanoc3::Item.new("", { :filename => "_posts/test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
+        Nanoc3::Item.new("", { :filename => "_articles/test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
+        Nanoc3::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2008 22:10" }, "test-of-post6")]
+
+      subject.stub(:items).and_return(articles)
+      subject.should_receive(:act_as_post).with(an_instance_of(Nanoc3::Item)).twice
+      subject.add_post_attributes
+    end  
+  end
+
   describe ".act_as_post" do
     before do
       @item = { :filename => "2011-02-12-test-of-post", :extension => ".md", :created_at => "01/12/2011 22:15" }
