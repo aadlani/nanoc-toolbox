@@ -10,6 +10,10 @@ describe Nanoc::Toolbox::Helpers::HtmlTag do
     it "returns an simple self-closing tag with option" do
       tag("hr", :class => "thin").should == %[<hr class="thin" />]
     end
+
+    it "returns an orphean tag when open is set to true" do
+      tag("hr", {:class => "thin"}, true).should == %[<hr class="thin">]
+    end
   end
   
   describe "#content_tag" do
