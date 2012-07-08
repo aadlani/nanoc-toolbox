@@ -38,7 +38,7 @@ module Nanoc::Toolbox::Helpers
     # Generate a Table of Content for a given item. The toc will be generated
     # form the item content. The parsing is done with Nokogiri through XPath.
     #
-    # @param  [String]  item_rep - the representation of desired item
+    # @param  [Nanoc3::ItemRep]  item_rep - the representation of desired item
     # @param  [Hash]    options - The Optional parameters
     # @option options (see #render_menu)
     # @option options [String] :path ('div[@class="section"]') Generic XPath for the sections
@@ -48,6 +48,7 @@ module Nanoc::Toolbox::Helpers
     # @see http://nokogiri.org/
     def toc_for(item_rep, options={})
       require 'nokogiri'
+      item_rep = item_rep.rep_named(:default) if item_rep.is_a? Nanoc3::Item
 
       # Parse options or set to default values
       options[:path]             ||= 'div[@class="section"]'

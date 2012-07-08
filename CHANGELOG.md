@@ -2,14 +2,25 @@
 
 ## developement
 
-## Release 0.0.5
+* CHANGE:   Google Analytics Helper with better test coverage
+
+
+## Release 0.0.7
+
+* NEW: TRAVIS CI
+* FIXED: Compatibility Issue with 1.8.7
+
+## Release 0.0.6
+
 * NEW:      Analytics Helper
 * NEW:      JS Minify Filter
 
 ## Release 0.0.5
+
 * CHANGED:  add the ability to filter by an attributes of an item on navigation_for
 
 ## Release 0.0.4
+
 * NEW:      add_section Filter
 * CHANGED:  bugfix on navigation helper 
 

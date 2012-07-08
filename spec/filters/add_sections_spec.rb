@@ -1,31 +1,4 @@
-# <div>
-#   <h1>Title</h1>
-#   
-#     <h2>Sub title1</h2>
-#     <p>Lorem Ipsum</p>
-#   
-#       <h3>Sub Sub Title1</h3>
-#       <p>Lorem Ipsum</p>
-# 
-#       <h3>Sub Sub Title2</h3>
-#       <p>Lorem Ipsum</p>
-# 
-#       <h3>Sub Sub Title3</h3>
-#       <p>Lorem Ipsum</p>
-# 
-#   
-#     <h2>Sub title2</h2>
-#     <p>Lorem Ipsum</p>
-# 
-#     <h2>Sub title3</h2>
-#     <p>Lorem Ipsum</p>
-#   
-#     <h2>Sub title4</h2>
-#     <p>Lorem Ipsum</p>
-# </div>
-
 require "spec_helper"
-require "nokogiri"
 
 describe Nanoc::Toolbox::Filters::AddSections do
   before(:each) do
@@ -33,6 +6,11 @@ describe Nanoc::Toolbox::Filters::AddSections do
   end
   
   describe ".run" do
-
+    it "minifies javascript" do
+      content = "<h1>A Title<h1/><h2>A Second Title<h2/>"
+      result = @filter.run(content)
+      result.should_not eq content
+      result.should =~ /"section"/
+    end
   end
 end

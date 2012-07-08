@@ -1,6 +1,8 @@
 # nanoc-toolbox
 
 [![Build Status](https://secure.travis-ci.org/aadlani/nanoc-toolbox.png)](http://travis-ci.org/aadlani/nanoc-toolbox)
+[![Dependency Status](https://gemnasium.com/aadlani/nanoc-toolbox.png)](https://gemnasium.com/aadlani/nanoc-toolbox)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/aadlani/nanoc-toolbox)
 
 ## Presentation
 
@@ -32,7 +34,7 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
 
 To use the nanoc-toolbox, you have to start by installing the gem.
 
-    gem install nanox-toolbox
+    gem install nanoc-toolbox
 
 Then require the project main file in your default.rb file in the lib directory of your nanoc project.
 
