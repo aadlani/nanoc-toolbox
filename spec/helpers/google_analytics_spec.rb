@@ -1,29 +1,37 @@
 require "spec_helper"
-include Nanoc::Toolbox::Helpers::GoogleAnalytics
+
+
+class GoogleAnalyticsDummyClass
+  include Nanoc::Toolbox::Helpers::GoogleAnalytics
+  def initialize
+    @config = { :ga_tracking_code => "UA-0000000-0" } 
+  end
+end
 
 describe Nanoc::Toolbox::Helpers::GoogleAnalytics do
-  subject { Nanoc::Toolbox::Helpers::GoogleAnalytics }
+  subject { GoogleAnalyticsDummyClass.new }
+  
   it { should respond_to(:ga_tracking_snippet) }
+  
   describe ".ga_tracking_snippet" do
-    before do
-     @config = {}
-    end
+    
     it "returns a string that contains the JS" do
-      ga_tracking_snippet().should include("<script")
-      ga_tracking_snippet().should include("var _gaq = _gaq || [];")
+      subject.ga_tracking_snippet().should include("<script")
+      subject.ga_tracking_snippet().should include("var _gaq = _gaq || [];")
     end
 
     it "includes the passed code" do
-      ga_tracking_snippet("UA-123456-1").should include("UA-123456-1")
+      subject.ga_tracking_snippet("UA-123456-1").should include("UA-123456-1")
     end
 
     it "includes the tracking code from the site config" do
-      @config = { :ga_tracking_code => "UA-0000000-0"}
-      ga_tracking_snippet().should include @config[:ga_tracking_code]
+      subject.instance_variable_set(:@config, { :ga_tracking_code => "UA-0000000-0"})
+      subject.ga_tracking_snippet().should include "UA-0000000-0"
     end
 
     it "includes the placeholder code when no value is found" do
-      ga_tracking_snippet().should include "UA-xxxxxx-x"
+      subject.instance_variable_set(:@config, { })
+      subject.ga_tracking_snippet().should include "UA-xxxxxx-x"
     end
   end
 end

@@ -12,6 +12,10 @@ module Nanoc::Toolbox::Helpers
   module GoogleAnalytics
     include Nanoc::Toolbox::Helpers::HtmlTag
     
+    # Return the javascript code snipet to use in your layout or views
+    #
+    # @param [String] ga_tracking_code the Google Analytics Tracking Code
+    # @return [String] the script tag to place in your layout
     def ga_tracking_snippet(ga_tracking_code=nil)
       ga_tracking_code ||= @config[:ga_tracking_code] || "UA-xxxxxx-x"
       js = <<-EOS
