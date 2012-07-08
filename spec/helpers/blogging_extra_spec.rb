@@ -167,8 +167,9 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
     end
 
     it "returns the article grouped by years and months" do
-      subject.posts_by_date.keys.should eq @last_articles.map {|i| i[:year]}.uniq
-      subject.posts_by_date[2010].should eq @last_articles[2..4]
+      grouped_article =  subject.posts_by_date
+      grouped_article.keys.should eq @last_articles.map {|i| i[:year]}.uniq
+      grouped_article[2010][12].should eq @last_articles[2..3]
     end
   end
 end
