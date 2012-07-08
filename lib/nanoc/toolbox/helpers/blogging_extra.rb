@@ -1,15 +1,25 @@
 require 'nanoc/toolbox/helpers/html_tag'
 
-
 module Nanoc::Toolbox::Helpers
   # NANOC Helper for giving items extra blog post behavior.
   #
-  # This module contains functions for ...
+  # This module contains features to the default Nanoc3::Helpers::Blogging
+  # module, like tagging, slug, etc... 
   # @author Anouar ADLANI
   module BloggingExtra
     include Nanoc::Toolbox::Helpers::HtmlTag
     include Nanoc3::Helpers::Blogging
 
+    # Enable blog post behavior on all the items located in the post folder(s)
+    #
+    # @example
+    #   # In your config.yaml
+    #   # post_dirs: [ 'posts' ]
+    #
+    #   # In your Rules file
+    #   preprocess do
+    #     add_post_attributes
+    #   end
     def add_post_attributes
       @config[:post_dirs] ||= ['_posts', '_articles']
       items.each do |item|
@@ -24,6 +34,11 @@ module Nanoc::Toolbox::Helpers
     #
     # @param [Nanoc::Item] item the item that will act as a post
     # @return [Nanoc::Item] the adapted item
+    #
+    # @example
+    #   items.each do |item|
+    #     act_as_post(item)
+    #   end
     def act_as_post(item)
       fname = slug_for(item)
 
@@ -33,6 +48,9 @@ module Nanoc::Toolbox::Helpers
 
         # Set creation date param from the values in the filename
         item[:created_at] = Time.local(item[:year], item[:month], item[:day])
+
+        # Strip the date from the filename
+        item[:slug] = fname.sub(/^\d+-\d+-\d+-/,'')
       else
         item[:created_at] ||= Time.now
         item[:created_at] = attribute_to_time(item[:created_at])
@@ -42,9 +60,6 @@ module Nanoc::Toolbox::Helpers
         item[:month] = item[:created_at].month
         item[:day]   = item[:created_at].day
       end
-
-      # Strip the date from the filename
-      item[:slug] = fname.sub(/^\d+-\d+-\d+-/,'')
 
       # Add additional meta data
       item[:kind] = 'article'
@@ -58,6 +73,7 @@ module Nanoc::Toolbox::Helpers
     #
     # @param [Nanoc::Item] item the item that will act as a post
     # @return [String] either the slug specified in the item or generate one
+    #
     # @example
     #   # item[:filename] = "abc def geh.html"
     #   slug_for(item) # => "abc-def-geh"
@@ -82,6 +98,7 @@ module Nanoc::Toolbox::Helpers
     # @option options [String] :url_format ("/tags/:tag_pattern:file_extension") The path pattern
     #
     # @return [Array<String>] An array of html links
+    #
     # @example 
     #   omited = ['strange_tag']
     #   options = { :tag_pattern => "%%TAGNAME%%", 
@@ -97,15 +114,13 @@ module Nanoc::Toolbox::Helpers
       options[:file_extension]  ||= ".html"
       options[:url_format]      ||= "/tags/#{options[:tag_pattern]}#{options[:file_extension]}"
 
-      item[:tags].each do |tag|
-        unless omit_tags.include? tag
+      tags = item[:tags] - omit_tags
+
+      tags.map! do |tag|
           title = options[:title].gsub(options[:tag_pattern], tag.downcase)
           url = options[:url_format].gsub(options[:tag_pattern], tag.downcase)
-          tags << content_tag('a', title, {:href => url})
-        end
+          content_tag('a', title, {:href => url})
       end
-
-      return tags
     end
     
     
@@ -116,9 +131,7 @@ module Nanoc::Toolbox::Helpers
     #
     # #return [Array<Nanoc::Item>] an array of recent items
     def recent_posts(count=5, current_item=nil)
-      recents = sorted_articles
-      recents -= [current_item] if recents.include?(current_item)
-      return recents[0, count]
+      (sorted_articles - [current_item])[0, count]
     end
     
     

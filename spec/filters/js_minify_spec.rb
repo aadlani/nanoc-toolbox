@@ -12,5 +12,3 @@ describe Nanoc::Toolbox::Filters::JsMinify do
     end
   end
 end
-
-

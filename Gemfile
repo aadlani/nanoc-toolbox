@@ -4,4 +4,4 @@ source :gemcutter
 gemspec
 
 gem 'simplecov', :require => false, :group => :test
-
+gem 'guard-rspec', :require => false, :group => :development
