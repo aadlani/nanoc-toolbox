@@ -2,7 +2,6 @@ require 'nanoc3'
 require 'nanoc/toolbox/version'
 require 'nanoc/toolbox/helpers'
 require 'nanoc/toolbox/filters'
-require 'nanoc/toolbox/nanoc_monkey_patches'
 
 # The namescope of the project
 module Nanoc
