@@ -194,7 +194,6 @@ module Nanoc::Toolbox::Helpers
         end
       end
 
-
       def find_breadcrumbs_trail(root)
         sections = breadcrumbs_for_identifier(root).map do |child|
           { :title        => (child[:title] || child.identifier),

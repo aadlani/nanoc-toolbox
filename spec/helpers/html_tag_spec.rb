@@ -2,6 +2,9 @@ require "spec_helper"
 include Nanoc::Toolbox::Helpers::HtmlTag
 
 describe Nanoc::Toolbox::Helpers::HtmlTag do
+  it { should respond_to(:tag) }
+  it { should respond_to(:content_tag) }
+
   describe "#tag" do
     it "returns an simple self-closing tag by default" do
       tag("br").should == "<br />"
