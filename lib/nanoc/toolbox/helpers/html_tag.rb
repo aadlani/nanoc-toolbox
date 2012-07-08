@@ -8,21 +8,26 @@ module Nanoc::Toolbox::Helpers
   module HtmlTag
     # Simple tag
     #
+    # @param [String] name the tag name
+    # @param [Hash] options options to set to the html element
+    # @param [Boolean] open flag to set if the tag is self closing or not
+    # @return [String] the requested tag string
+    #
     # @example
-    #   tag("br")
-    #    # => <br />
-    #
-    #   tag("hr", class => "thin", true)
-    #    # => <br class="thin">
-    #
-    #   tag("input", :type => 'text')
-    #    # => <input type="text" />
+    #   tag("br") # => <br />
+    #   tag("hr", class => "thin", true) # => <br class="thin">
+    #   tag("input", :type => 'text') # => <input type="text" />
     #
     def tag(name, options={}, open=false)
       "<#{name}#{tag_options(options) if options}#{open ? ">" : " />"}"
     end
 
     # Content tag
+    #
+    # @param [String] name the tag name
+    # @param [Hash] options options to set to the html element
+    # @param [Boolean] open flag to set if the tag is self closing or not
+    # @return [String] the requested tag string
     #
     # @example
     #   content_tag(:p, "Hello world!")
