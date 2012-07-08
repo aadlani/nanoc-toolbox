@@ -1,12 +1,12 @@
 require "spec_helper"
 
 class GravatarDummyClass
+  include Nanoc::Toolbox::Helpers::Gravatar
 end
 
 describe Nanoc::Toolbox::Helpers::Gravatar do
   before(:each) do
     @gravatar = GravatarDummyClass.new
-    @gravatar.extend(described_class)
     
     @email = 'anouar@adlani.com'
     @avatar = 'avatar/4d076af1db60b16e1ce080505baf821c'
@@ -39,9 +39,7 @@ describe Nanoc::Toolbox::Helpers::Gravatar do
       end
     end
 
-
     context "when parameters passed in the options" do
-      
       it "removes unknown parameters" do
         @gravatar.gravatar_url(@email, :blabl => 'jsdfsdfsd').should == @secure_host[false]
       end
@@ -65,7 +63,6 @@ describe Nanoc::Toolbox::Helpers::Gravatar do
   end
   
   describe "#gravatar_image" do
-    
     it "converts an email to an html tag" do
       @gravatar.gravatar_image(@email).should == %[<img src="#{@secure_host[false]}" />]
     end

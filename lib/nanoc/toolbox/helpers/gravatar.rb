@@ -27,8 +27,8 @@ module Nanoc::Toolbox::Helpers
     SIZE = 1..512
 
     # Available options that could be configure
-    HELPER_OPTION = [:ext, :secure]
-    GRAVATAR_OPTIONS = [:default_icon, :size, :rating]
+    HELPER_OPTION     = [:ext, :secure]
+    GRAVATAR_OPTIONS  = [:default_icon, :size, :rating]
     AVAILABLE_OPTIONS = HELPER_OPTION + GRAVATAR_OPTIONS
 
     # Default values set to the options
