@@ -1,13 +1,10 @@
-require 'nanoc/toolbox/helpers/html_tag'
-
 module Nanoc::Toolbox::Helpers
   # NANOC Helper for giving items extra blog post behavior.
   #
   # This module contains features to the default Nanoc3::Helpers::Blogging
-  # module, like tagging, slug, etc... 
+  # module, like tagging, slug, etc...
   # @author Anouar ADLANI
   module BloggingExtra
-    include Nanoc::Toolbox::Helpers::HtmlTag
     include Nanoc3::Helpers::Blogging
 
     # Enable blog post behavior on all the items located in the post folder(s)
@@ -55,7 +52,7 @@ module Nanoc::Toolbox::Helpers
         item[:created_at] ||= Time.now
         item[:created_at] = attribute_to_time(item[:created_at])
 
-        # get the date from 
+        # get the date from
         item[:year]  = item[:created_at].year
         item[:month] = item[:created_at].month
         item[:day]   = item[:created_at].day
@@ -85,45 +82,6 @@ module Nanoc::Toolbox::Helpers
       item[:slug]
     end
 
-
-    # Returns an Array of links to tags in the item, optionally omits the 
-    # given tags from the selection
-    #
-    # @param [Item] item the item from which to extract tags
-    # @param [Array<String>] omit_tags tags that should be excluded
-    # @param [Item] options the options for the links to be created
-    # @option options [String] :tag_pattern ("%%tag%%") The pattern to be replace by the tag name
-    # @option options [String] :title ("options[:tag_pattern]") The text that will be in the link
-    # @option options [String] :file_extension (".html") The file extension
-    # @option options [String] :url_format ("/tags/:tag_pattern:file_extension") The path pattern
-    #
-    # @return [Array<String>] An array of html links
-    #
-    # @example 
-    #   omited = ['strange_tag']
-    #   options = { :tag_pattern => "%%TAGNAME%%", 
-    #               :title       => "articles tagged with %%TAGNAME%%", 
-    #               :url_format  => "/tags/tag_%%TAGNAME%%.html"}
-    #   tag_links_for(item, omited, options) # => ['<a href="/tags/tag_a.html">articles tagged with a</a>', '<a href="/tags/tag_b.html">articles tagged with b</a>']
-    def tag_links_for(item, omit_tags=[], options={})
-      tags = []
-      return tags unless item[:tags]
-
-      options[:tag_pattern]     ||= "%%tag%%"
-      options[:title]           ||= options[:tag_pattern]
-      options[:file_extension]  ||= ".html"
-      options[:url_format]      ||= "/tags/#{options[:tag_pattern]}#{options[:file_extension]}"
-
-      tags = item[:tags] - omit_tags
-
-      tags.map! do |tag|
-          title = options[:title].gsub(options[:tag_pattern], tag.downcase)
-          url = options[:url_format].gsub(options[:tag_pattern], tag.downcase)
-          content_tag('a', title, {:href => url})
-      end
-    end
-    
-    
     # Returns n number of recent posts, optionally omits the current one
     #
     # @param [Integer] count the number of item to return
@@ -133,8 +91,7 @@ module Nanoc::Toolbox::Helpers
     def recent_posts(count=5, current_item=nil)
       (sorted_articles - [current_item])[0, count]
     end
-    
-    
+
     # Retreive the list of existing articles grouped by years and months
     #
     # @return [Hash] Items grouped in a hash
