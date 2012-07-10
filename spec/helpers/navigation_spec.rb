@@ -1,6 +1,5 @@
 require "spec_helper"
 
-
 class NavigationDummyClass
   include Nanoc::Toolbox::Helpers::Navigation
 end
@@ -51,18 +50,18 @@ describe Nanoc::Toolbox::Helpers::Navigation do
           subject.render_menu(sections).should =~ /^<ol><li>/
       end
     end
-    
+
     context "when no options specified" do
       it "returns menu within a html unordered list (<ul> <li>) when it is specified in the options" do
         sections = [{:title => "Title", :link => "http://example.com" }]
           subject.render_menu(sections, :collection_tag => 'ul').should =~ /^<ul><li>/
       end
-      
+
       it "returns menu within a div/span when it is specified in the options" do
         sections = [{:title => "Title", :link => "http://example.com" }]
           subject.render_menu(sections, :collection_tag => 'div', :item_tag => 'span').should =~ /^<div><span>/
       end
-      
+
       it "returns only 2 levels when it's specified in the options" do
         sections     = [
           {:title => "Title", :link => "http://example.com", :subsections => [
@@ -79,13 +78,66 @@ describe Nanoc::Toolbox::Helpers::Navigation do
   end
 
   describe ".toc_for" do
-    it "should return a toc for a page"
+    before :all do
+      @content = <<-EOS
+        <html>
+          <body>
+            <div id="title1" class="section">
+              <h1>Title 1</h1>
+              <div  id="title21" class="section">
+                <h2>Title 2<h2>
+              </div>
+              <div id="title22" class="section">
+                <h2>Title 2<h2>
+              </div>
+              <div  id="title23" class="section">
+                <h2>Title 2<h2>
+              </div>
+            </div>
+          </body>
+        </html>
+      EOS
+    end
+
+    it "should return a toc for a page" do
+      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
+      item_rep.instance_variable_set :@content, {:pre => @content}
+
+      subject.toc_for(item_rep).should include "#title1"
+      subject.toc_for(item_rep).should include "#title21"
+      subject.toc_for(item_rep).should include "#title22"
+      subject.toc_for(item_rep).should include "#title23"
+
+      subject.toc_for(item_rep).should include "Title 1"
+      subject.toc_for(item_rep).should include "Title 2"
+    end
+
+    it "calls find_to_sections and render_menu for the formating" do
+      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
+      item_rep.instance_variable_set :@content, {:pre => @content}
+
+      subject.should_receive(:find_toc_sections).once
+      subject.should_receive(:render_menu).once
+      subject.toc_for(item_rep)
+    end
+
+    it "returns an empty string when the main content is empty" do
+      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
+      item_rep.instance_variable_set :@content, {:pre => ""}
+      subject.toc_for(item_rep).should eq ""
+    end
+
+    it "returns an empty string when the main content is empty" do
+      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
+      item_rep.instance_variable_set :@content, {:pre => @content}
+      subject.toc_for(item_rep, {:path => "section"}).should eq ""
+    end
   end
-  
+
   describe ".navigation_for" do
     it "should return a navigation menu for a item"
   end
-  
+
   describe ".breadcrumb_for" do
     it "should return a breadcrumb for an item"
   end

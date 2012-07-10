@@ -1,6 +1,6 @@
 require 'nanoc/toolbox/helpers/html_tag'
 
-module Nanoc::Toolbox::Helpers  
+module Nanoc::Toolbox::Helpers
   # NANOC Helper for the Navigation related stuff.
   #
   # This module contains functions for generating navigation menus for your
@@ -34,7 +34,6 @@ module Nanoc::Toolbox::Helpers
       render_menu(sections, options)
     end
 
-
     # Generate a Table of Content for a given item. The toc will be generated
     # form the item content. The parsing is done with Nokogiri through XPath.
     #
@@ -42,7 +41,7 @@ module Nanoc::Toolbox::Helpers
     # @param  [Hash]    options - The Optional parameters
     # @option options (see #render_menu)
     # @option options [String] :path ('div[@class="section"]') Generic XPath for the sections
-    # 
+    #
     # @return [String] The output ready to be displayed by the caller
     #
     # @see http://nokogiri.org/
@@ -50,19 +49,18 @@ module Nanoc::Toolbox::Helpers
       require 'nokogiri'
       item_rep = item_rep.rep_named(:default) if item_rep.is_a? Nanoc3::Item
 
-      # Parse options or set to default values
       options[:path]             ||= 'div[@class="section"]'
 
       # Retreive the parsed content and init nokogiri
       compiled_content = item_rep.instance_eval { @content[:pre] }
       doc = Nokogiri::HTML(compiled_content)
       doc_root = doc.xpath('/html/body').first
+      return "" if doc_root.nil?
 
       # Find all sections, and render them
       sections = find_toc_sections(doc_root, options[:path])
-      render_menu(sections, options)
+      render_menu(sections, options) || ""
     end
-
 
     # Generate a Breadcrumb for a given item. The breadcrumbs, is starting with
     # the root item and ending with the item itself.
@@ -77,10 +75,8 @@ module Nanoc::Toolbox::Helpers
     #
     # @see Nanoc3::Helpers::Breadcrumbs#breadcrumbs_for_identifier
     def breadcrumb_for(identifier, options={})
-
-      # Parse options or set to default values
       options[:collection_tag]   ||= 'ul'
-      
+
       # Retreive the breadcrumbs trail and format them
       sections = find_breadcrumbs_trail(identifier)
       render_menu(sections, options)
@@ -119,24 +115,21 @@ module Nanoc::Toolbox::Helpers
     #
     # @return [String] The output ready to be displayed by the caller
     def render_menu(items, options={})
-
-      # Parse options or set to default values
       options[:depth]            ||= 3
       options[:collection_tag]   ||= 'ol'
       options[:item_tag]         ||= 'li'
       options[:title_tag]        ||= 'h2'
       options[:title]            ||= nil
-      
+
       # Parse the title and remove it from the options
       title =  options[:title] ? content_tag(options[:title_tag], options[:title]) : ''
-      options.delete(:title_tag) 
-      options.delete(:title) 
-      
+      options.delete(:title_tag)
+      options.delete(:title)
+
       # Decrease the depth level
       options[:depth] -= 1
 
       rendered_menu = items.map do |item|
-
         # Render only if there is depth left
         if options[:depth].to_i  > 0 && item[:subsections]
           output = render_menu(item[:subsections], options)
@@ -147,59 +140,58 @@ module Nanoc::Toolbox::Helpers
 
       end.join()
 
-      
       title + content_tag(options[:collection_tag], rendered_menu) unless rendered_menu.strip.empty?
     end
 
     private
 
-      # Recursive method that extract from an XPath pattern the document structure
-      # and return the "permalinks" to each sections in an Array of Hash that
-      # could be used by the rendering method. The structure is deducted by the
-      # H1-6 header within the html element defined by the XPATH
-      def find_toc_sections(section, section_xpath, title_level=1)
-        return {} unless section.xpath(section_xpath)
+    # Recursive method that extract from an XPath pattern the document structure
+    # and return the "permalinks" to each sections in an Array of Hash that
+    # could be used by the rendering method. The structure is deducted by the
+    # H1-6 header within the html element defined by the XPATH
+    def find_toc_sections(section, section_xpath, title_level=1)
+      return {} unless section.xpath(section_xpath)
 
-        # For each section found call the find_toc_sections on it with an
-        # increased header level (ex: h1 => h2) and then generate the hash res
-        sections = section.xpath(section_xpath).map do |subsection|
-          header = subsection.css("h1, h2, h3, h4, h5, h6").first
-          sub_id = subsection['id']
-          sub_title = header ? header.inner_html : 'untitled'
-          subsections = {}
+      # For each section found call the find_toc_sections on it with an
+      # increased header level (ex: h1 => h2) and then generate the hash res
+      sections = section.xpath(section_xpath).map do |subsection|
+        header = subsection.css("h1, h2, h3, h4, h5, h6").first
+        sub_id = subsection['id']
+        sub_title = header ? header.inner_html : 'untitled'
+        subsections = {}
 
-          if subsection.xpath("#{section_xpath}") && title_level <= 6
-            subsections = find_toc_sections(subsection, "#{section_xpath}", title_level+1)
-          end
-          { :title => sub_title, :link => '#' + sub_id, :subsections =>  subsections }
+        if subsection.xpath("#{section_xpath}") && title_level <= 6
+          subsections = find_toc_sections(subsection, "#{section_xpath}", title_level+1)
         end
+        { :title => sub_title, :link => '#' + sub_id, :subsections =>  subsections }
       end
+    end
 
-      # Recursive method that extract from an XPath pattern the document structure
-      # and return the "permalinks" in a Array of Hash that could be used by the
-      # rendering method
-      def find_item_tree(root, options={})
-        return nil unless root.children
-        
-        # filter the elements to contain only the kind requested
-        children = options[:kind] ? root.children.select { |item| item[:kind] == options[:kind] } : root.children
-        
-        # For each child call the find_item_tree on it and then generate the hash
-        sections = children.map do |child|
-          subsections = find_item_tree(child)
+    # Recursive method that extract from an XPath pattern the document structure
+    # and return the "permalinks" in a Array of Hash that could be used by the
+    # rendering method
+    def find_item_tree(root, options={})
+      return nil unless root.children
 
-          { :title        => (child[:title] || child.identifier),
-            :link         => relative_path_to(child),
-            :subsections  => subsections }
-        end
+      # filter the elements to contain only the kind requested
+      children = options[:kind] ? root.children.select { |item| item[:kind] == options[:kind] } : root.children
+
+      # For each child call the find_item_tree on it and then generate the hash
+      sections = children.map do |child|
+        subsections = find_item_tree(child)
+
+        { :title        => (child[:title] || child.identifier),
+          :link         => relative_path_to(child),
+          :subsections  => subsections }
       end
+    end
 
-      def find_breadcrumbs_trail(root)
-        sections = breadcrumbs_for_identifier(root).map do |child|
-          { :title        => (child[:title] || child.identifier),
-            :link         => relative_path_to(child),
-            :subsections  => nil }
-        end
+    def find_breadcrumbs_trail(root)
+      sections = breadcrumbs_for_identifier(root).map do |child|
+        { :title        => (child[:title] || child.identifier),
+          :link         => relative_path_to(child),
+          :subsections  => nil }
       end
+    end
   end
 end
