@@ -5,7 +5,7 @@ module Nanoc::Toolbox::Filters
   # using the JSMin gem
   # @see http://rubygems.org/gems/jsmin
   # @author Anouar ADLANI <anouar@adlani.com>
-  class JsMinify < Nanoc3::Filter
+  class JsMinify < Nanoc::Filter
     identifier :js_minify
 
     def run(content, args = {})

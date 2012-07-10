@@ -31,7 +31,7 @@ module Nanoc::Toolbox::Filters
   #   section
   #     p
   # @author Denis Defreyne <denis.defreyne@stoneship.org>
-  class AddSections < Nanoc3::Filter
+  class AddSections < Nanoc::Filter
 
     identifiers :add_sections
 

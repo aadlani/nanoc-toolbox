@@ -1,11 +1,11 @@
 module Nanoc::Toolbox::Helpers
   # NANOC Helper for giving items extra blog post behavior.
   #
-  # This module contains features to the default Nanoc3::Helpers::Blogging
+  # This module contains features to the default Nanoc::Helpers::Blogging
   # module, like tagging, slug, etc...
   # @author Anouar ADLANI
   module BloggingExtra
-    include Nanoc3::Helpers::Blogging
+    include Nanoc::Helpers::Blogging
 
     # Enable blog post behavior on all the items located in the post folder(s)
     #

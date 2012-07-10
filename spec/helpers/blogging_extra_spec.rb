@@ -32,13 +32,13 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
   describe ".add_post_attributes" do
     it "defines the items as posts when located in the defined folders" do
       articles = [
-        Nanoc3::Item.new("", { :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
-        Nanoc3::Item.new("", { :filename => "_posts/test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
-        Nanoc3::Item.new("", { :filename => "_articles/test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
-        Nanoc3::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2008 22:10" }, "test-of-post6")]
+        Nanoc::Item.new("", { :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
+        Nanoc::Item.new("", { :filename => "_posts/test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
+        Nanoc::Item.new("", { :filename => "_articles/test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
+        Nanoc::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2008 22:10" }, "test-of-post6")]
 
       subject.stub(:items).and_return(articles)
-      subject.should_receive(:act_as_post).with(an_instance_of(Nanoc3::Item)).twice
+      subject.should_receive(:act_as_post).with(an_instance_of(Nanoc::Item)).twice
       subject.add_post_attributes
     end
   end
@@ -78,12 +78,12 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
   describe ".recent_posts" do
     before do
       @last_articles = [
-        Nanoc3::Item.new("", { :filename => "test-of-post1", :extension => ".md", :created_at => "01/12/2008 22:15" }, "test-of-post1"),
-        Nanoc3::Item.new("", { :filename => "test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
-        Nanoc3::Item.new("", { :filename => "test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
-        Nanoc3::Item.new("", { :filename => "test-of-post4", :extension => ".md", :created_at => "01/12/2010 22:12" }, "test-of-post4"),
-        Nanoc3::Item.new("", { :filename => "test-of-post5", :extension => ".md", :created_at => "01/11/2010 22:11" }, "test-of-post5"),
-        Nanoc3::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2013 22:10" }, "test-of-post6")]
+        Nanoc::Item.new("", { :filename => "test-of-post1", :extension => ".md", :created_at => "01/12/2008 22:15" }, "test-of-post1"),
+        Nanoc::Item.new("", { :filename => "test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
+        Nanoc::Item.new("", { :filename => "test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
+        Nanoc::Item.new("", { :filename => "test-of-post4", :extension => ".md", :created_at => "01/12/2010 22:12" }, "test-of-post4"),
+        Nanoc::Item.new("", { :filename => "test-of-post5", :extension => ".md", :created_at => "01/11/2010 22:11" }, "test-of-post5"),
+        Nanoc::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2013 22:10" }, "test-of-post6")]
 
       subject.stub(:sorted_articles).and_return(@last_articles)
     end
@@ -111,12 +111,12 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
     before do
       @last_articles = []
       articles = [
-        Nanoc3::Item.new("", { :filename => "test-of-post1", :extension => ".md", :created_at => "01/12/2013 22:15" }, "test-of-post1"),
-        Nanoc3::Item.new("", { :filename => "test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
-        Nanoc3::Item.new("", { :filename => "test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
-        Nanoc3::Item.new("", { :filename => "test-of-post4", :extension => ".md", :created_at => "01/12/2010 22:12" }, "test-of-post4"),
-        Nanoc3::Item.new("", { :filename => "test-of-post5", :extension => ".md", :created_at => "01/02/2010 22:11" }, "test-of-post5"),
-        Nanoc3::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2008 22:10" }, "test-of-post6")]
+        Nanoc::Item.new("", { :filename => "test-of-post1", :extension => ".md", :created_at => "01/12/2013 22:15" }, "test-of-post1"),
+        Nanoc::Item.new("", { :filename => "test-of-post2", :extension => ".md", :created_at => "01/12/2012 22:14" }, "test-of-post2"),
+        Nanoc::Item.new("", { :filename => "test-of-post3", :extension => ".md", :created_at => "01/12/2010 22:13" }, "test-of-post3"),
+        Nanoc::Item.new("", { :filename => "test-of-post4", :extension => ".md", :created_at => "01/12/2010 22:12" }, "test-of-post4"),
+        Nanoc::Item.new("", { :filename => "test-of-post5", :extension => ".md", :created_at => "01/02/2010 22:11" }, "test-of-post5"),
+        Nanoc::Item.new("", { :filename => "test-of-post6", :extension => ".md", :created_at => "01/12/2008 22:10" }, "test-of-post6")]
 
       articles.each  do |article|
         @last_articles << subject.act_as_post(article)

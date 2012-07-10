@@ -128,7 +128,7 @@ module Nanoc::Toolbox::Helpers
         attributes  = { :title => options[:title].gsub(options[:tag_pattern], tagname) }
         identifier  = options[:identifier].gsub(options[:tag_pattern], tagname)
 
-        @items << Nanoc3::Item.new(raw_content, attributes, identifier, :binary => false)
+        @items << Nanoc::Item.new(raw_content, attributes, identifier, :binary => false)
       end
     end
   end

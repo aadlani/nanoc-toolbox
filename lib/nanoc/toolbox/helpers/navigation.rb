@@ -8,7 +8,7 @@ module Nanoc::Toolbox::Helpers
   #
   # @author Anouar ADLANI <anouar@adlani.com>
   module Navigation
-    include Nanoc3::Helpers::LinkTo
+    include Nanoc::Helpers::LinkTo
     include Nanoc::Toolbox::Helpers::HtmlTag
 
     # Generate a navigation menu for a given item.
@@ -37,7 +37,7 @@ module Nanoc::Toolbox::Helpers
     # Generate a Table of Content for a given item. The toc will be generated
     # form the item content. The parsing is done with Nokogiri through XPath.
     #
-    # @param  [Nanoc3::ItemRep]  item_rep - the representation of desired item
+    # @param  [Nanoc::ItemRep]  item_rep - the representation of desired item
     # @param  [Hash]    options - The Optional parameters
     # @option options (see #render_menu)
     # @option options [String] :path ('div[@class="section"]') Generic XPath for the sections
@@ -47,7 +47,7 @@ module Nanoc::Toolbox::Helpers
     # @see http://nokogiri.org/
     def toc_for(item_rep, options={})
       require 'nokogiri'
-      item_rep = item_rep.rep_named(:default) if item_rep.is_a? Nanoc3::Item
+      item_rep = item_rep.rep_named(:default) if item_rep.is_a? Nanoc::Item
 
       options[:path]             ||= 'div[@class="section"]'
 
@@ -65,7 +65,7 @@ module Nanoc::Toolbox::Helpers
     # Generate a Breadcrumb for a given item. The breadcrumbs, is starting with
     # the root item and ending with the item itself.
     #
-    # Requires the Helper: Nanoc3::Helpers::Breadcrumbs
+    # Requires the Helper: Nanoc::Helpers::Breadcrumbs
     #
     # @param  [String]  identifier - the identifier string of element
     # @param  [Hash]    options - The Optional parameters
@@ -73,7 +73,7 @@ module Nanoc::Toolbox::Helpers
     #
     # @return [String] The output ready to be displayed by the caller
     #
-    # @see Nanoc3::Helpers::Breadcrumbs#breadcrumbs_for_identifier
+    # @see Nanoc::Helpers::Breadcrumbs#breadcrumbs_for_identifier
     def breadcrumb_for(identifier, options={})
       options[:collection_tag]   ||= 'ul'
 
