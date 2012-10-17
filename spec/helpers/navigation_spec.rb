@@ -13,66 +13,64 @@ describe Nanoc::Toolbox::Helpers::Navigation do
   it { should respond_to(:breadcrumb_for) }
 
   describe ".render_menu" do
+    before do
+      @sections     = [
+        {:title => "Title", :link => "http://example.com", :subsections => [
+          {:title => "Title", :link => "http://example.com", :subsections => [
+            {:title => "Title", :link => "http://example.com", :subsections => [
+              {:title => "Title", :link => "http://example.com"}
+            ]}
+          ]}
+        ]}]
+    end
+
     context "when no options specified" do
+
       it "returns nil when the menu is empty" do
         subject.render_menu([]).should be_nil
       end
 
       it "returns a simple ordered list when given a 1 level menu" do
         sections = [{:title => "Title", :link => "http://example.com" }]
-        html_menu = %[<ol><li><a href="http://example.com">Title</a></li></ol>]
-
+        html_menu = %[<ol class="menu"><li><a href="http://example.com">Title</a></li></ol>]
         subject.render_menu(sections).should == html_menu
       end
 
       it "returns a nested ordered list when given a multi level menu" do
-        sections     = [{:title => "Title", :link => "http://example.com", :subsections => [{:title => "Title", :link => "http://example.com" },{:title => "Title", :link => "http://example.com" }] }]
-        html_menu = %[<ol><li><a href="http://example.com">Title</a><ol><li><a href="http://example.com">Title</a></li><li><a href="http://example.com">Title</a></li></ol></li></ol>]
-
-        subject.render_menu(sections).should == html_menu
+        html_menu = %[<ol class="menu"><li><a href="http://example.com">Title</a><ol class="menu"><li><a href="http://example.com">Title</a><ol class="menu"><li><a href="http://example.com">Title</a></li></ol></li></ol></li></ol>]
+        subject.render_menu(@sections).should == html_menu
       end
 
-      it "returns only 3 levels when nothing is specified in the options" do
-        sections     = [
-          {:title => "Title", :link => "http://example.com", :subsections => [
-            {:title => "Title", :link => "http://example.com", :subsections => [
-              {:title => "Title", :link => "http://example.com", :subsections => [
-                {:title => "Title", :link => "http://example.com"}
-              ]}
-            ]}
-          ]}]
-        html_menu = %[<ol><li><a href="http://example.com">Title</a><ol><li><a href="http://example.com">Title</a><ol><li><a href="http://example.com">Title</a></li></ol></li></ol></li></ol>]
-        subject.render_menu(sections).should == html_menu
+      it "returns only 3 levels deep" do
+          html_menu = %[<ol class="menu"><li><a href="http://example.com">Title</a><ol class="menu"><li><a href="http://example.com">Title</a><ol class="menu"><li><a href="http://example.com">Title</a></li></ol></li></ol></li></ol>]
+          subject.render_menu(@sections).should == html_menu
       end
 
-      it "returns menu within an html ordered list (<ol> <li>) when nothing is specified in the options" do
-        sections = [{:title => "Title", :link => "http://example.com" }]
-          subject.render_menu(sections).should =~ /^<ol><li>/
+      it "returns menu within an html ordered list with menu class(<ol> <li>)" do
+        subject.render_menu(@sections).should =~ /^<ol class="menu"><li>/
       end
     end
 
-    context "when no options specified" do
-      it "returns menu within a html unordered list (<ul> <li>) when it is specified in the options" do
-        sections = [{:title => "Title", :link => "http://example.com" }]
-          subject.render_menu(sections, :collection_tag => 'ul').should =~ /^<ul><li>/
+    context "when options specified" do
+      it "renders a title" do
+        subject.render_menu(@sections, :title => 'title').should =~ /^<h2>title<\/h2>/
+        subject.render_menu(@sections, :title => 'title', :title_tag => 'h1').should =~ /^<h1>title<\/h1>/
+      end
+      it "returns menu within a html unordered list (<ul> <li>) " do
+        subject.render_menu(@sections, :collection_tag => 'ul').should =~ /^<ul class="menu"><li>/
       end
 
-      it "returns menu within a div/span when it is specified in the options" do
-        sections = [{:title => "Title", :link => "http://example.com" }]
-          subject.render_menu(sections, :collection_tag => 'div', :item_tag => 'span').should =~ /^<div><span>/
+      it "returns menu within a div/span " do
+        subject.render_menu(@sections, :collection_tag => 'div', :item_tag => 'span').should =~ /^<div class="menu"><span>/
       end
 
-      it "returns only 2 levels when it's specified in the options" do
-        sections     = [
-          {:title => "Title", :link => "http://example.com", :subsections => [
-            {:title => "Title", :link => "http://example.com", :subsections => [
-              {:title => "Title", :link => "http://example.com", :subsections => [
-                {:title => "Title", :link => "http://example.com"}
-              ]}
-            ]}
-          ]}]
-        html_menu = %[<ol><li><a href="http://example.com">Title</a><ol><li><a href="http://example.com">Title</a></li></ol></li></ol>]
-        subject.render_menu(sections, :depth => 2).should == html_menu
+      it "returns only 2 levels deep" do
+        html_menu = %[<ol class="menu"><li><a href="http://example.com">Title</a><ol class="menu"><li><a href="http://example.com">Title</a></li></ol></li></ol>]
+        subject.render_menu(@sections, :depth => 2).should == html_menu
+      end
+
+      it "set a specific class name" do
+        subject.render_menu(@sections, :collection_tag => 'ul').should =~ /^<ul class="menu"><li>/
       end
     end
   end
@@ -127,7 +125,7 @@ describe Nanoc::Toolbox::Helpers::Navigation do
       subject.toc_for(item_rep).should eq ""
     end
 
-    it "returns an empty string when the main content is empty" do
+    it "returns an empty string when the provided css path returns nothing" do
       item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
       item_rep.instance_variable_set :@content, {:pre => @content}
       subject.toc_for(item_rep, {:path => "section"}).should eq ""
@@ -135,7 +133,7 @@ describe Nanoc::Toolbox::Helpers::Navigation do
   end
 
   describe ".navigation_for" do
-    it "should return a navigation menu for a item"
+    it "should return a navigation menu for a item" 
   end
 
   describe ".breadcrumb_for" do

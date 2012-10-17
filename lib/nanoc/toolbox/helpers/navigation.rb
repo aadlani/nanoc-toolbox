@@ -76,6 +76,7 @@ module Nanoc::Toolbox::Helpers
     # @see Nanoc::Helpers::Breadcrumbs#breadcrumbs_for_identifier
     def breadcrumb_for(identifier, options={})
       options[:collection_tag]   ||= 'ul'
+      options[:collection_class] ||= 'breadcrumb'
 
       # Retreive the breadcrumbs trail and format them
       sections = find_breadcrumbs_trail(identifier)
@@ -117,6 +118,7 @@ module Nanoc::Toolbox::Helpers
     def render_menu(items, options={})
       options[:depth]            ||= 3
       options[:collection_tag]   ||= 'ol'
+      options[:collection_class] ||= 'menu'
       options[:item_tag]         ||= 'li'
       options[:title_tag]        ||= 'h2'
       options[:title]            ||= nil
@@ -140,10 +142,10 @@ module Nanoc::Toolbox::Helpers
 
       end.join()
 
-      title + content_tag(options[:collection_tag], rendered_menu) unless rendered_menu.strip.empty?
+      title + content_tag(options[:collection_tag], rendered_menu, :class => options[:collection_class]) unless rendered_menu.strip.empty?
     end
 
-    private
+  private
 
     # Recursive method that extract from an XPath pattern the document structure
     # and return the "permalinks" to each sections in an Array of Hash that
@@ -188,7 +190,7 @@ module Nanoc::Toolbox::Helpers
 
     def find_breadcrumbs_trail(root)
       sections = breadcrumbs_for_identifier(root).map do |child|
-        { :title        => (child[:title] || child.identifier),
+        { :title        => (child[:short_title] || child[:title] || child.identifier),
           :link         => relative_path_to(child),
           :subsections  => nil }
       end

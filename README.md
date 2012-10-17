@@ -15,7 +15,10 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
  * **Navigation**: Menu, Breadcrumb, Table of contents, 
  * **Gravatar**: Avatar Using the Gravatar System
  * **HtmlTag**: HTML Tag helper for other helpers
- * **Google Analytics***: Generate the JS code snipet for Analytics
+ * **Google Analytics**: Generate the JS code snipet for Analytics
+ * **Blogging Extra**: Add extra blog post behavior
+ * **Tagging Extra**: Add extra tagging behavior
+ * **Disqus**: Disqus comments helper
 
 ### Filters
 
@@ -26,7 +29,7 @@ The nanoc-toolbox is a collection of filters and helpers for the static site gen
 ## Requirements and compatibility
 
  * **ruby >= 1.8.7**: This gem has been tested against ruby 1.8.7 and 1.9.2
- * **nanoc3**: It requires obviously the Nanoc gem
+ * **nanoc**: It requires obviously the Nanoc gem
  * **Nokogiri**: For the HTML Tidy Filter
  * **jsmin**: For the JS Minify Filter
 
