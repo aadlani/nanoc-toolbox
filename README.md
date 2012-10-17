@@ -7,6 +7,8 @@
 ## Presentation
 
 The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc.
+I have created this gem for my personal need on [my blog/resume website]( http://anouar.im ).
+If you feel something's missing, feel free to contribute.
 
 ## Features
 
@@ -48,7 +50,7 @@ require "nanoc/toolbox"
 And the last step is to include the required helper or filter, anywhere in the lib directory of your lib directory.
 The usage wants you to put it in the default.rb or the helpers.rb file. 
 
-The following example shows a sample helpers_.rb file in the lib directory
+The following example shows a sample `helpers_.rb` file in the lib directory
 
 ```ruby
 # Default Helpers provided By Nanoc
@@ -60,11 +62,21 @@ include Nanoc::Toolbox::Helpers::Navigation
 include Nanoc::Toolbox::Helpers::Gravatar
 ```
 
+## Documentation
+
+### API Documentation
+
+The API documentation could be found on [RubyDoc.info](http://rubydoc.info/github/aadlani/nanoc-toolbox/frames)
+
+### Usage Guides
+
+Some usage guides could be found on the [GitHub wiki](https://github.com/aadlani/nanoc-toolbox/wiki)
+
 ## Acknowledgments
 
 All the people in [this list](https://github.com/aadlani/nanoc-toolbox/contributors)
 
-## Authors
+## Author
 
 * Anouar ADLANI <anouar@adlani.com>
 

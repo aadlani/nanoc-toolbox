@@ -2,8 +2,8 @@
 
 ## developement
 
-* CHANGE:   Google Analytics Helper with better test coverage
-
+* CHANGE:   Code refactoring, Bug Fixes and Better test coverage
+* DELETE:   Unused helpers
 
 ## Release 0.0.7
 
