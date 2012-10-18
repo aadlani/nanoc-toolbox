@@ -3,8 +3,8 @@ module Nanoc
     # Holds information about library version.
     module Version
       MAJOR = 0
-      MINOR = 0
-      PATCH = 8
+      MINOR = 1
+      PATCH = 0
       BUILD = nil
 
       STRING = [MAJOR, MINOR, PATCH, BUILD].compact.join(".")
