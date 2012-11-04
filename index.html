@@ -1,80 +1,146 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Nanoc-toolbox by aadlani</title>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Nanoc-toolbox</h1>
+        <p>The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc</p>
 
-	<title>aadlani/nanoc-toolbox @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #c7c7c7;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #383838; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #383838; }
-    h3 { text-align: center; color: #383838; }
-    a { color: #383838; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
-</head>
+        <p class="view"><a href="https://github.com/aadlani/nanoc-toolbox">View the Project on GitHub <small>aadlani/nanoc-toolbox</small></a></p>
 
-<body>
-  <a href="http://github.com/aadlani/nanoc-toolbox"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
+        <ul>
+          <li><a href="https://github.com/aadlani/nanoc-toolbox/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/aadlani/nanoc-toolbox/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/aadlani/nanoc-toolbox">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>nanoc-toolbox</h1>
 
-    <div class="download">
-      <a href="http://github.com/aadlani/nanoc-toolbox/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/aadlani/nanoc-toolbox/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+<p><a href="http://travis-ci.org/aadlani/nanoc-toolbox"><img src="https://secure.travis-ci.org/aadlani/nanoc-toolbox.png" alt="Build Status"></a>
+<a href="https://gemnasium.com/aadlani/nanoc-toolbox"><img src="https://gemnasium.com/aadlani/nanoc-toolbox.png" alt="Dependency Status"></a>
+<a href="https://codeclimate.com/github/aadlani/nanoc-toolbox"><img src="https://codeclimate.com/badge.png" alt="Code Climate"></a></p>
+
+<h2>Presentation</h2>
+
+<p>The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc.
+I have created this gem for my personal need on <a href="http://anouar.im">my blog/resume website</a>.
+If you feel something's missing, feel free to contribute.</p>
+
+<h2>Features</h2>
+
+<h3>Helpers</h3>
+
+<ul>
+<li>
+<strong>Navigation</strong>: Menu, Breadcrumb, Table of contents, </li>
+<li>
+<strong>Gravatar</strong>: Avatar Using the Gravatar System</li>
+<li>
+<strong>HtmlTag</strong>: HTML Tag helper for other helpers</li>
+<li>
+<strong>Google Analytics</strong>: Generate the JS code snipet for Analytics</li>
+<li>
+<strong>Blogging Extra</strong>: Add extra blog post behavior</li>
+<li>
+<strong>Tagging Extra</strong>: Add extra tagging behavior</li>
+<li>
+<strong>Disqus</strong>: Disqus comments helper</li>
+<li>
+<strong>Github Gist</strong>: Github Gist helper</li>
+</ul><h3>Filters</h3>
+
+<ul>
+<li>
+<strong>AddSection</strong>: Section div's based on headers</li>
+<li>
+<strong>HtmlTidy</strong>: Clean up the generated html code with Nokogiri</li>
+<li>
+<strong>JS Minify</strong>: Minifies the JS files using JSMin</li>
+</ul><h2>Requirements and compatibility</h2>
+
+<ul>
+<li>
+<strong>ruby &gt;= 1.8.7</strong>: This gem has been tested against ruby 1.8.7 and 1.9.2</li>
+<li>
+<strong>nanoc</strong>: It requires obviously the Nanoc gem</li>
+<li>
+<strong>Nokogiri</strong>: For the HTML Tidy Filter</li>
+<li>
+<strong>jsmin</strong>: For the JS Minify Filter</li>
+</ul><h2>Installation</h2>
+
+<p>To use the nanoc-toolbox, you have to start by installing the gem.</p>
+
+<pre><code>gem install nanoc-toolbox
+</code></pre>
+
+<p>Then require the project main file in your default.rb file in the lib directory of your nanoc project.</p>
+
+<div class="highlight"><pre><span class="nb">require</span> <span class="s2">"nanoc/toolbox"</span>
+</pre></div>
+
+<p>And the last step is to include the required helper or filter, anywhere in the lib directory of your lib directory.
+The usage wants you to put it in the default.rb or the helpers.rb file. </p>
+
+<p>The following example shows a sample <code>helpers_.rb</code> file in the lib directory</p>
+
+<div class="highlight"><pre><span class="c1"># Default Helpers provided By Nanoc</span>
+<span class="kp">include</span> <span class="no">Nanoc3</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">Blogging</span>
+<span class="kp">include</span> <span class="no">Nanoc3</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">Breadcrumbs</span>
+
+<span class="c1"># Custom Helpers</span>
+<span class="kp">include</span> <span class="no">Nanoc</span><span class="o">::</span><span class="no">Toolbox</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">Navigation</span>
+<span class="kp">include</span> <span class="no">Nanoc</span><span class="o">::</span><span class="no">Toolbox</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">Gravatar</span>
+</pre></div>
+
+<h2>Documentation</h2>
+
+<h3>API Documentation</h3>
+
+<p>The API documentation could be found on <a href="http://rubydoc.info/github/aadlani/nanoc-toolbox/frames">RubyDoc.info</a></p>
+
+<h3>Usage Guides</h3>
+
+<p>Some usage guides could be found on the <a href="https://github.com/aadlani/nanoc-toolbox/wiki">GitHub wiki</a></p>
+
+<h2>Acknowledgments</h2>
+
+<p>All the people in <a href="https://github.com/aadlani/nanoc-toolbox/contributors">this list</a></p>
+
+<h2>Author</h2>
+
+<ul>
+<li>Anouar ADLANI <a href="mailto:anouar@adlani.com">anouar@adlani.com</a>
+</li>
+</ul><h2>Changelog</h2>
+
+<p>See the <a href="https://github.com/aadlani/nanoc-toolbox/blob/master/CHANGELOG.md">CHANGELOG</a> file for details.</p>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2011 Anouar ADLANI, nanoc-toolbox is released under the MIT license.
+See the <a href="https://github.com/aadlani/nanoc-toolbox/blob/master/LICENSE.md">LICENSE</a> file for details.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/aadlani">aadlani</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
-    <h1><a href="http://github.com/aadlani/nanoc-toolbox">nanoc-toolbox</a>
-      <span class="small">by <a href="http://github.com/aadlani">aadlani</a></span></h1>
-
-    <div class="description">
-      
-    </div>
-
-    <h2>Authors</h2>
-<p>Anouar ADLANI (anouar@adlani.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Anouar ADLANI (anouar@adlani.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/aadlani/nanoc-toolbox/zipball/master">zip</a> or
-      <a href="http://github.com/aadlani/nanoc-toolbox/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/aadlani/nanoc-toolbox</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/aadlani/nanoc-toolbox">aadlani/nanoc-toolbox</a>
-    </div>
-
-  </div>
-
-  
-</body>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
 </html>
