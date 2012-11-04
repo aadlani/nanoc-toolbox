@@ -1,5 +1,3 @@
-require 'nanoc/toolbox/helpers/html_tag'
-
 module Nanoc::Toolbox::Helpers
 
   # NANOC Helper for the Gravatar avatars

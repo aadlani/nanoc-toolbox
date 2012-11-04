@@ -21,6 +21,7 @@ If you feel something's missing, feel free to contribute.
  * **Blogging Extra**: Add extra blog post behavior
  * **Tagging Extra**: Add extra tagging behavior
  * **Disqus**: Disqus comments helper
+ * **Github Gist**: Github Gist helper
 
 ### Filters
 
