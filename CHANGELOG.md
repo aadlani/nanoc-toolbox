@@ -1,6 +1,6 @@
 # Changelog
 
-## Release 0.1.1 (developement)
+## Release 0.1.2 (developement)
 
 * FIXED:    Compatibility broken by nanoc on breadcrumbs
 * CHANGE:   Gemfile source linked to 'https://rubygems.org'
