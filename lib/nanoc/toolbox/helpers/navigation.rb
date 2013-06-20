@@ -9,6 +9,7 @@ module Nanoc::Toolbox::Helpers
   # @author Anouar ADLANI <anouar@adlani.com>
   module Navigation
     include Nanoc::Helpers::LinkTo
+    include Nanoc::Helpers::Breadcrumbs
     include Nanoc::Toolbox::Helpers::HtmlTag
 
     # Generate a navigation menu for a given item.
@@ -189,7 +190,7 @@ module Nanoc::Toolbox::Helpers
     end
 
     def find_breadcrumbs_trail(root)
-      sections = breadcrumbs_for_identifier(root).map do |child|
+      sections = breadcrumbs_trail.(root).map do |child|
         { :title        => (child[:short_title] || child[:title] || child.identifier),
           :link         => relative_path_to(child),
           :subsections  => nil }
