@@ -15,12 +15,12 @@ Gem::Specification.new do |s|
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
   s.required_rubygems_version = ">= 1.3.6"
 
-  s.add_dependency "nanoc",    "~> 3.4"
-  s.add_dependency "nokogiri", "~> 1.4"
+  s.add_dependency "nanoc",    "~> 3.6"
+  s.add_dependency "nokogiri", "~> 1.6"
   s.add_dependency "jsmin",    "~> 1.0"
   
-  s.add_development_dependency "bundler", "~> 1.1"
-  s.add_development_dependency "rspec",   "~> 2.4"
+  s.add_development_dependency "bundler", "~> 1.3"
+  s.add_development_dependency "rspec",   "~> 2.13"
   s.add_development_dependency "rake",    "~> 0.9"
 
   s.files        = `git ls-files`.split("\n")
