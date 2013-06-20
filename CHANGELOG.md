@@ -1,14 +1,23 @@
 # Changelog
 
-## developement
+## Release 0.1.1 (developement)
+
+* FIXED:    Compatibility broken by nanoc on breadcrumbs
+* CHANGE:   Gemfile source linked to 'https://rubygems.org'
+
+## Release 0.1.1
+
+* NEW:      Github Gist Helper
+
+## Release 0.1.0
 
 * CHANGE:   Code refactoring, Bug Fixes and Better test coverage
 * DELETE:   Unused helpers
 
 ## Release 0.0.7
 
-* NEW: TRAVIS CI
-* FIXED: Compatibility Issue with 1.8.7
+* NEW:      TRAVIS CI
+* FIXED:    Compatibility Issue with 1.8.7
 
 ## Release 0.0.6
 
