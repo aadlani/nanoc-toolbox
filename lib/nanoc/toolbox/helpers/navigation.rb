@@ -114,6 +114,7 @@ module Nanoc::Toolbox::Helpers
     # @option options [String] :item_tag ('li') tag englobing item
     # @option options [String] :title_tag ('h2') tag englobing the title
     # @option options [String] :title ('') Title of the menu, if nil will not display title
+    # @option options [String] :separator ('') Menu item separator
     #
     # @return [String] The output ready to be displayed by the caller
     def render_menu(items, options={})
@@ -123,6 +124,8 @@ module Nanoc::Toolbox::Helpers
       options[:item_tag]         ||= 'li'
       options[:title_tag]        ||= 'h2'
       options[:title]            ||= nil
+      options[:separator]        ||= ''
+
 
       # Parse the title and remove it from the options
       title =  options[:title] ? content_tag(options[:title_tag], options[:title]) : ''
@@ -139,7 +142,7 @@ module Nanoc::Toolbox::Helpers
           options[:depth] += 1 # Increase the depth level after the call of navigation_for
         end
         output ||= ""
-        content_tag(options[:item_tag], link_to_unless_current(item[:title], item[:link]) + output)
+        content_tag(options[:item_tag], link_to_unless_current(item[:title], item[:link]) + options[:separator] + output)
 
       end.join()
 
@@ -190,11 +193,14 @@ module Nanoc::Toolbox::Helpers
     end
 
     def find_breadcrumbs_trail(root)
-      sections = breadcrumbs_trail.(root).map do |child|
+      trail = ["/"]
+      root.split('/').each { |s| trail << trail.last + "#{s}/" unless s.empty? }
+      trail.map do |child_identifier|
+        child = @items[child_identifier]
         { :title        => (child[:short_title] || child[:title] || child.identifier),
           :link         => relative_path_to(child),
-          :subsections  => nil }
-      end
+          :subsections  => nil } if child
+      end.compact
     end
   end
 end
