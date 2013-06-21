@@ -1,8 +1,10 @@
 # nanoc-toolbox
 
-[![Build Status](https://secure.travis-ci.org/aadlani/nanoc-toolbox.png)](http://travis-ci.org/aadlani/nanoc-toolbox)
+[![Build Status](https://travis-ci.org/aadlani/nanoc-toolbox.png)](http://travis-ci.org/aadlani/nanoc-toolbox)
 [![Dependency Status](https://gemnasium.com/aadlani/nanoc-toolbox.png)](https://gemnasium.com/aadlani/nanoc-toolbox)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/aadlani/nanoc-toolbox)
+[![Coverage Status](https://coveralls.io/repos/aadlani/nanoc-toolbox/badge.png)](https://coveralls.io/r/aadlani/nanoc-toolbox)
+
 
 ## Presentation
 

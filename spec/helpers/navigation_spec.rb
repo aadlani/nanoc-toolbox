@@ -95,40 +95,34 @@ describe Nanoc::Toolbox::Helpers::Navigation do
           </body>
         </html>
       EOS
+
+      @item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
+      @item_rep.instance_variable_set :@content, {:pre => @content}
     end
 
     it "should return a toc for a page" do
-      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
-      item_rep.instance_variable_set :@content, {:pre => @content}
+      subject.toc_for(@item_rep).should include "#title1"
+      subject.toc_for(@item_rep).should include "#title21"
+      subject.toc_for(@item_rep).should include "#title22"
+      subject.toc_for(@item_rep).should include "#title23"
 
-      subject.toc_for(item_rep).should include "#title1"
-      subject.toc_for(item_rep).should include "#title21"
-      subject.toc_for(item_rep).should include "#title22"
-      subject.toc_for(item_rep).should include "#title23"
-
-      subject.toc_for(item_rep).should include "Title 1"
-      subject.toc_for(item_rep).should include "Title 2"
+      subject.toc_for(@item_rep).should include "Title 1"
+      subject.toc_for(@item_rep).should include "Title 2"
     end
 
     it "calls find_to_sections and render_menu for the formating" do
-      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
-      item_rep.instance_variable_set :@content, {:pre => @content}
-
       subject.should_receive(:find_toc_sections).once
       subject.should_receive(:render_menu).once
-      subject.toc_for(item_rep)
+      subject.toc_for(@item_rep)
     end
 
     it "returns an empty string when the main content is empty" do
-      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
-      item_rep.instance_variable_set :@content, {:pre => ""}
-      subject.toc_for(item_rep).should eq ""
+      @item_rep.instance_variable_set :@content, {:pre => ""}
+      subject.toc_for(@item_rep).should eq ""
     end
 
     it "returns an empty string when the provided css path returns nothing" do
-      item_rep = Nanoc::ItemRep.new(Nanoc::Item.new("", {:title => ""},  "/yetAnotherItem/"), "")
-      item_rep.instance_variable_set :@content, {:pre => @content}
-      subject.toc_for(item_rep, {:path => "section"}).should eq ""
+      subject.toc_for(@item_rep, {:path => "section"}).should eq ""
     end
   end
 
@@ -137,6 +131,28 @@ describe Nanoc::Toolbox::Helpers::Navigation do
   end
 
   describe ".breadcrumb_for" do
-    it "should return a breadcrumb for an item"
+    before(:all) do
+      @items = {
+        "/" => Nanoc::Item.new("", {:title => "Home"},  "/"),
+        "/yetAnotherItem/" => Nanoc::Item.new("", {:title => "Sub1"},  "/yetAnotherItem/"),
+        "/yetAnotherItem/last/edit/" => Nanoc::Item.new("", {:title => "Sub2"},  "/yetAnotherItem/last/edit/")
+      }
+      subject.instance_variable_set :@items, @items
+    end
+
+    it "should return a breadcrumb for an item" do
+      subject.should_receive(:relative_path_to).exactly(2).times { "./" }
+      breadcrumb = subject.breadcrumb_for('/yetAnotherItem/')
+      breadcrumb.should include "Home"
+      breadcrumb.should_not include "Sub2"
+    end
+
+    it "should return a breadcrumb even if an empty element" do
+      subject.should_receive(:relative_path_to).exactly(3).times { "./" }
+      breadcrumb =  subject.breadcrumb_for('/yetAnotherItem/last/edit')
+      breadcrumb.should include "Home"
+      breadcrumb.should include "Sub1"
+      breadcrumb.should include "Sub2"
+    end
   end
 end
