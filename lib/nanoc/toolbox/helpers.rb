@@ -5,6 +5,7 @@ require 'nanoc/toolbox/helpers/disqus'
 require 'nanoc/toolbox/helpers/blogging_extra'
 require 'nanoc/toolbox/helpers/tagging_extra'
 require 'nanoc/toolbox/helpers/google_analytics'
+require 'nanoc/toolbox/helpers/google_ua'
 require 'nanoc/toolbox/helpers/github_gist'
 
 # This module will regroup all the helpers for nanoc
