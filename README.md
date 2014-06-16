@@ -19,6 +19,7 @@ If you feel something's missing, feel free to contribute.
  * **Navigation**: Menu, Breadcrumb, Table of contents, 
  * **Gravatar**: Avatar Using the Gravatar System
  * **HtmlTag**: HTML Tag helper for other helpers
+ * **Google UA**: Generate the JS code snipet for Universal Analytics
  * **Google Analytics**: Generate the JS code snipet for Analytics
  * **Blogging Extra**: Add extra blog post behavior
  * **Tagging Extra**: Add extra tagging behavior
