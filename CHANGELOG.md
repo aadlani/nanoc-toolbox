@@ -1,5 +1,9 @@
 # Changelog
 
+## Release 0.2.0
+
+* ADD:     Google Universal Analytics (by @grv87)
+
 ## Release 0.1.2
 
 * FIXED:    Compatibility broken by nanoc on breadcrumbs
