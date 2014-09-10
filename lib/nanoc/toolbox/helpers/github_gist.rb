@@ -26,7 +26,7 @@ module Nanoc::Toolbox::Helpers
     # @param [Integer] gist_id - the ID of the Gist
     # @param [String] filename - the optional filename to display
     def gist(gist_id, filename=nil)
-      raise ArgumentError, "Gist ID should be a Integer" unless gist_id.is_a? Integer 
+      raise ArgumentError, "Gist ID should be a hex number" unless (gist_id.to_s).match(/^\h+$/)
       url = "#{GIST_HOST}/#{gist_id}.#{GIST_EXT}"
 
       if filename

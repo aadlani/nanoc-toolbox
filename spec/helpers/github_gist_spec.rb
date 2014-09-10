@@ -14,10 +14,11 @@ describe Nanoc::Toolbox::Helpers::GithubGist do
         lambda{ subject.gist }.should raise_error(ArgumentError)
       end
 
-      it "ensures that Gist ID is an Integer" do
-        lambda{ subject.gist('abc') }.should raise_error(ArgumentError)
-        lambda{ subject.gist('123') }.should raise_error(ArgumentError)
+      it "ensures that Gist ID is an Integer or a hex number" do
+        lambda{ subject.gist('123') }.should_not raise_error(ArgumentError)
         lambda{ subject.gist(12345) }.should_not raise_error(ArgumentError)
+        lambda{ subject.gist('decafbad123') }.should_not raise_error(ArgumentError)
+        lambda{ subject.gist('+supercool+xxx') }.should raise_error(ArgumentError)
       end
 
       it "returns the script tag for a gist" do
