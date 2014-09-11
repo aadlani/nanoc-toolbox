@@ -1,8 +1,12 @@
 # Changelog
 
+## Release 0.2.1
+
+* FIXED:    Gist ID should be hex num not Intege (by @jm3)
+
 ## Release 0.2.0
 
-* ADD:     Google Universal Analytics (by @grv87)
+* ADD:      Google Universal Analytics (by @grv87)
 
 ## Release 0.1.2
 
