@@ -9,7 +9,7 @@
 ## Presentation
 
 The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc.
-I have created this gem for my personal need on [my blog/resume website]( http://anouar.im ).
+I have created this gem for my personal need on [my blog/resume website]( http://anouar.adlani.com ).
 If you feel something's missing, feel free to contribute.
 
 ## Features
