@@ -35,15 +35,15 @@ describe Nanoc::Toolbox::Helpers::TaggingExtra do
   describe ".has_tag?" do
     it "returns true when the item contains the desired tag" do
       item = { :tags => ['a', 'b', 'c'] }
-      subject.has_tag?(item, 'a').should be_true
+      subject.has_tag?(item, 'a').should be true
     end
     it "returns false when the item contains the desired tag" do
       item = { :tags => ['a', 'b', 'c'] }
-      subject.has_tag?(item, 'd').should be_false
+      subject.has_tag?(item, 'd').should be false
     end
     it "returns fals when the item do not have tag" do
       item = { }
-      subject.has_tag?(item, 'd').should be_false
+      subject.has_tag?(item, 'd').should be false
     end
   end
 

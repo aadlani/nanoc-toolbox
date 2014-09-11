@@ -11,14 +11,14 @@ describe Nanoc::Toolbox::Helpers::GithubGist do
   describe "#gist" do
     context "without a filename" do
       it "takes at list a Gist ID as parameter" do
-        lambda{ subject.gist }.should raise_error(ArgumentError)
+        lambda{ subject.gist }.should raise_error
       end
 
       it "ensures that Gist ID is an Integer or a hex number" do
-        lambda{ subject.gist('123') }.should_not raise_error(ArgumentError)
-        lambda{ subject.gist(12345) }.should_not raise_error(ArgumentError)
-        lambda{ subject.gist('decafbad123') }.should_not raise_error(ArgumentError)
-        lambda{ subject.gist('+supercool+xxx') }.should raise_error(ArgumentError)
+        lambda{ subject.gist('123') }.should_not raise_error
+        lambda{ subject.gist(12345) }.should_not raise_error
+        lambda{ subject.gist('decafbad123') }.should_not raise_error
+        lambda{ subject.gist('+supercool+xxx') }.should raise_error
       end
 
       it "returns the script tag for a gist" do
@@ -29,8 +29,8 @@ describe Nanoc::Toolbox::Helpers::GithubGist do
 
     context "with a filename" do
       it "ensures that the file name is an String" do
-        lambda{ subject.gist(12345, 12345) }.should raise_error(ArgumentError)
-        lambda{ subject.gist(12345, 'index.html') }.should_not raise_error(ArgumentError)
+        lambda{ subject.gist(12345, 12345) }.should raise_error
+        lambda{ subject.gist(12345, 'index.html') }.should_not raise_error
       end
 
       it "returns the script tag for a specific file if specified" do

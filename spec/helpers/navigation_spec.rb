@@ -131,7 +131,7 @@ describe Nanoc::Toolbox::Helpers::Navigation do
   end
 
   describe ".breadcrumb_for" do
-    before(:all) do
+    before(:each) do
       @items = {
         "/" => Nanoc::Item.new("", {:title => "Home"},  "/"),
         "/yetAnotherItem/" => Nanoc::Item.new("", {:title => "Sub1"},  "/yetAnotherItem/"),

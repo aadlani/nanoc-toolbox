@@ -71,7 +71,7 @@ describe Nanoc::Toolbox::Helpers::BloggingExtra do
     end
 
     it "enables by default the comments" do
-      @item[:comments].should be_true
+      @item[:comments].should be true
     end
   end
 
