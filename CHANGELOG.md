@@ -1,5 +1,9 @@
 # Changelog
 
+## Release 0.3.0
+
+* FIXED:    Due to dependencies, now we could only support 1.9.3 and higher
+
 ## Release 0.2.1
 
 * FIXED:    Gist ID should be hex num not Intege (by @jm3)

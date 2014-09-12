@@ -34,7 +34,7 @@ If you feel something's missing, feel free to contribute.
 
 ## Requirements and compatibility
 
- * **ruby >= 1.8.7**: This gem has been tested against ruby 1.8.7 and 1.9.2
+ * **ruby >= 1.9.3**: This gem has been tested against ruby 1.9.3, 2.0.0, 2.1.0
  * **nanoc**: It requires obviously the Nanoc gem
  * **Nokogiri**: For the HTML Tidy Filter
  * **jsmin**: For the JS Minify Filter

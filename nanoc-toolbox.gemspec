@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description  = "The nanoc-toolbox is a collection of filters and helpers for the static site generator tool nanoc"
   s.rdoc_options = ["--main", "README.rdoc"]
 
-  s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
+  s.required_ruby_version = ">= 1.9.3"
   s.required_rubygems_version = ">= 1.3.6"
 
   s.add_dependency "nanoc",    "~> 3.7"
