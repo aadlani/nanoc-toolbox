@@ -21,6 +21,8 @@ module Nanoc::Toolbox::Helpers
     # @param  [Hash]    options - The Optional parameters
     # @option options (see #render_menu)
     # @option options [String] :kind ('article') The kind of items to display in the menu
+    # @option options [Symbol] :sort (nil) Item attribute to use for sorting
+    # @option options [Int] :fold_at (nil) Depth at which to exclude items not siblings of current item
     #
     # @return [String] The output ready to be displayed by the caller
     def navigation_for(identifier, options={})
@@ -28,7 +30,7 @@ module Nanoc::Toolbox::Helpers
       root = @items.find { |i| i.identifier == identifier }
 
       # Do not render if there is no child
-      return nil unless root.children
+      return nil unless root && root.children
 
       # Find all sections, and render them
       sections = find_item_tree(root, options)
@@ -134,7 +136,6 @@ module Nanoc::Toolbox::Helpers
 
       # Decrease the depth level
       options[:depth] -= 1
-
       rendered_menu = items.map do |item|
         # Render only if there is depth left
         if options[:depth].to_i  > 0 && item[:subsections]
@@ -142,10 +143,13 @@ module Nanoc::Toolbox::Helpers
           options[:depth] += 1 # Increase the depth level after the call of navigation_for
         end
         output ||= ""
-        content_tag(options[:item_tag], link_to_unless_current(item[:title], item[:link]) + options[:separator] + output)
+        content_tag(
+          options[:item_tag],
+          link_to_unless_current(item[:title], item[:link]) + options[:separator] + output,
+          :class => item[:class]
+        )
 
       end.join()
-
       title + content_tag(options[:collection_tag], rendered_menu, :class => options[:collection_class]) unless rendered_menu.strip.empty?
     end
 
@@ -179,16 +183,32 @@ module Nanoc::Toolbox::Helpers
     def find_item_tree(root, options={})
       return nil unless root.children
 
+      # Include root's children if its depth in the tree is less than options[:fold_at]
+      # or if it is an ancestor of the current item.
+      if (options[:fold_at] and (root.identifier.count '/') > options[:fold_at] and @item.identifier.index(root.identifier) != 0)
+        return nil
+      end
+
       # filter the elements to contain only the kind requested
       children = options[:kind] ? root.children.select { |item| item[:kind] == options[:kind] } : root.children
 
+      if (options[:sort])
+        # Sort items according to each item's sort property or its identifier
+        children = children.sort { |x, y|
+          (x[options[:sort]] ? x[options[:sort]].to_s : File.basename(x.identifier)) <=>
+          (y[options[:sort]] ? y[options[:sort]].to_s : File.basename(y.identifier))
+        }
+      end
+
       # For each child call the find_item_tree on it and then generate the hash
       sections = children.map do |child|
-        subsections = find_item_tree(child)
-
-        { :title        => (child[:title] || child.identifier),
+        subsections = find_item_tree(child, options)
+        {
+          :title        => (child[:title] || child.identifier),
           :link         => relative_path_to(child),
-          :subsections  => subsections }
+          :subsections  => subsections,
+          :class        => child.identifier == @item.identifier ? 'selected' : nil,
+        }
       end
     end
 
