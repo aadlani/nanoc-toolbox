@@ -185,7 +185,7 @@ module Nanoc::Toolbox::Helpers
 
       # Include root's children if its depth in the tree is less than options[:fold_at]
       # or if it is an ancestor of the current item.
-      if (options[:fold_at] and (root.identifier.count '/') > options[:fold_at] and @item.identifier.index(root.identifier) != 0)
+      if (options[:fold_at] and (root.identifier.to_s.count '/') > options[:fold_at] and @item.identifier.to_s.index(root.identifier) != 0)
         return nil
       end
 

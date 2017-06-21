@@ -58,8 +58,8 @@ The following example shows a sample `helpers_.rb` file in the lib directory
 
 ```ruby
 # Default Helpers provided By Nanoc
-include Nanoc3::Helpers::Blogging
-include Nanoc3::Helpers::Breadcrumbs
+include Nanoc::Helpers::Blogging
+include Nanoc::Helpers::Breadcrumbs
 
 # Custom Helpers
 include Nanoc::Toolbox::Helpers::Navigation
