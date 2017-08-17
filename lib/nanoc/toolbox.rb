@@ -1,4 +1,4 @@
-require 'nanoc3'
+require 'nanoc'
 require 'nanoc/toolbox/version'
 require 'nanoc/toolbox/helpers'
 require 'nanoc/toolbox/filters'
@@ -10,5 +10,5 @@ module Nanoc
   # for the static site generator tool nanoc
   module Toolbox
   end
-  
+
 end
